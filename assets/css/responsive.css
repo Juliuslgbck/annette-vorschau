@@ -1,0 +1,130 @@
+@media (max-width: 700px) {
+  .nav-inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 0.9rem 1.25rem;
+  }
+
+  .nav-brand-name {
+    font-size: 1.15rem;
+  }
+
+  .nav-links {
+    gap: 0.4rem 0.9rem;
+  }
+
+  .nav-links a {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-frame {
+    padding: 0;
+  }
+
+  .home-hero {
+    height: auto;
+    border-radius: 0;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.75rem 1.25rem;
+  }
+
+  .hero-text-col {
+    max-width: none;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-ctas .cta-btn {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.64rem;
+  }
+
+  .hero-img-col {
+    align-self: center;
+    padding-top: 1.25rem;
+  }
+
+  .hero-img-col img {
+    max-width: 220px;
+  }
+
+  .highlights {
+    padding: 1.75rem 1.25rem 2.25rem;
+  }
+
+  .highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .site-footer-cols {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .ueber-body,
+  .galerie-overview,
+  .galerie-detail,
+  .impressum-body,
+  .kontakt-body,
+  .kurs-wrap {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .ueber-hero {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .ueber-portrait {
+    aspect-ratio: 16 / 9;
+    object-position: center 15%;
+  }
+
+  .ueber-sections,
+  .style-grid,
+  .kurs-times,
+  .preis-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .witem {
+    grid-template-columns: 1fr;
+  }
+
+  .witem-image,
+  .witem img {
+    height: 52vw;
+    min-height: 190px;
+  }
+
+  .wdet {
+    padding: 1.25rem;
+  }
+
+  .tab-btn {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .kalender-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .foto-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .kurs-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

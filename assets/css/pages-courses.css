@@ -1,0 +1,369 @@
+.kurs-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 0;
+}
+
+.tab-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab-btn {
+  margin-bottom: -1px;
+  padding: 0.75rem 1.5rem 0.65rem;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--ink-f);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 400;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+  color: var(--crimson);
+}
+
+.tab-btn.active {
+  border-bottom-color: var(--crimson);
+}
+
+.tab-panel {
+  display: none;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.panel-intro {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-eyebrow {
+  margin-bottom: 0.4rem;
+  color: var(--crimson);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.panel-intro h2 {
+  margin-bottom: 0.6rem;
+  color: var(--crimson);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.panel-intro p,
+.panel-body p {
+  max-width: 560px;
+  margin-bottom: 0.6rem;
+  color: var(--ink-s);
+  font-size: 0.87rem;
+  line-height: 1.75;
+}
+
+.foto-wide img,
+.foto-strip img,
+.foto-duo img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+  object-fit: cover;
+  transition: opacity 0.2s;
+}
+
+.foto-wide img {
+  aspect-ratio: 16 / 7;
+  margin-bottom: 0.5rem;
+  object-position: center 40%;
+}
+
+.foto-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.foto-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.foto-strip img,
+.foto-duo img {
+  aspect-ratio: 4 / 3;
+}
+
+.foto-wide img:hover,
+.foto-strip img:hover,
+.foto-duo img:hover {
+  opacity: 0.88;
+}
+
+.kurs-times {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.kurs-time-card {
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(139, 34, 82, 0.15);
+  border-radius: 2px;
+  background: var(--paper-warm);
+}
+
+.kurs-time-card .day {
+  margin-bottom: 0.2rem;
+  color: var(--crimson);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.kurs-time-card .time {
+  margin-bottom: 0.3rem;
+  color: var(--ink);
+  font-size: 0.85rem;
+}
+
+.kurs-time-card .detail {
+  color: var(--ink-s);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.kalender-wrap {
+  margin: 1.5rem 0;
+}
+
+.kalender-label {
+  margin-bottom: 0.75rem;
+  color: var(--crimson);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.kalender-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+}
+
+.kal-monat {
+  overflow: hidden;
+  border: 1px solid rgba(139, 34, 82, 0.15);
+  border-radius: 2px;
+  background: var(--paper-warm);
+}
+
+.kal-monat-head {
+  padding: 0.4rem 0.6rem;
+  background: var(--crimson);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.kal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  border-top: 1px solid var(--border);
+  background: var(--border);
+}
+
+.kal-day-head {
+  padding: 0.2rem 0;
+  background: #f5f0eb;
+  color: var(--ink-f);
+  font-size: 0.48rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.kal-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.4rem;
+  padding: 0.28rem 0;
+  background: #fff;
+  color: var(--ink-s);
+  font-size: 0.65rem;
+  text-align: center;
+}
+
+.kal-day.leer {
+  background: #faf8f5;
+  color: transparent;
+}
+
+.kal-day.termin {
+  background: var(--crimson);
+  color: #fff;
+  font-weight: 500;
+}
+
+.kurs-note {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  color: var(--ink-f);
+  font-size: 0.77rem;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.preis-heading {
+  margin: 1.75rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border-crimson);
+  color: var(--crimson);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.preis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+.preis-item {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: #fff;
+}
+
+.preis-item .preis-label {
+  margin-bottom: 0.25rem;
+  color: var(--ink-f);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+}
+
+.preis-item .preis-wert {
+  color: var(--crimson);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.preis-item .preis-detail {
+  margin-top: 0.3rem;
+  color: var(--ink-s);
+  font-size: 0.71rem;
+  line-height: 1.5;
+}
+
+.einzeln-table {
+  width: 100%;
+  margin-top: 0.75rem;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.einzeln-table th {
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid rgba(139, 34, 82, 0.25);
+  color: var(--crimson);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  font-weight: 400;
+  text-align: left;
+}
+
+.einzeln-table td {
+  padding: 0.38rem 0.75rem;
+  border-bottom: 1px solid rgba(26, 23, 20, 0.05);
+  color: var(--ink-s);
+}
+
+.einzeln-table tr:last-child td {
+  border-bottom: none;
+}
+
+.einzeln-table td:last-child {
+  color: var(--ink);
+}
+
+.course-small-note {
+  margin-top: 0.5rem;
+  color: var(--ink-f);
+  font-size: 0.76rem;
+}
+
+.kurs-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding: 1.4rem 1.6rem;
+  border: 1px solid var(--border-crimson);
+  border-radius: 2px;
+  background: var(--paper-warm);
+}
+
+.kurs-cta h3 {
+  margin-bottom: 0.3rem;
+  color: var(--crimson);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.kurs-cta p {
+  margin: 0;
+  color: var(--ink-s);
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+.kurs-cta a:not(.cta-btn) {
+  color: var(--crimson);
+}
+
+.kurs-loading {
+  padding: 3rem;
+  color: var(--ink-f);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  text-align: center;
+}

@@ -1,0 +1,253 @@
+.cta-btn {
+  padding: 0.75rem 2rem;
+  border-radius: 1px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+/* Sekundaer: bestehender Stil, fuers feste Beere-Rot */
+.cta-btn--outline {
+  border: 1px solid var(--crimson);
+  background: transparent;
+  color: var(--crimson);
+}
+
+.cta-btn--outline:hover {
+  background: var(--crimson);
+  color: #fff;
+}
+
+/* Primaer: weiss gefuellt, mit Beere-Rot als Kontur/Text */
+.cta-btn--primary {
+  border: 1px solid var(--crimson);
+  background: #fff;
+  color: var(--crimson);
+}
+
+.cta-btn--primary:hover {
+  background: var(--crimson);
+  color: #fff;
+}
+
+/* Ghost: heller Umriss auf dunklem Bildhintergrund, z.B. sekundaerer Hero-CTA */
+.cta-btn--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  color: #fff;
+}
+
+.cta-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
+
+.moverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(26, 23, 20, 0.55);
+}
+
+.moverlay.open {
+  display: flex;
+}
+
+.mbox {
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  padding: 2rem;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: #fff;
+}
+
+.meyebrow {
+  margin-bottom: 0.3rem;
+  color: var(--crimson);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.mbox h3 {
+  margin-bottom: 0.2rem;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.mmeta {
+  margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink-f);
+  font-size: 0.75rem;
+}
+
+.mbox label {
+  display: block;
+  margin: 0.8rem 0 0.28rem;
+  color: var(--ink-s);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.mbox input,
+.mbox textarea {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 1px;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.mbox input:focus,
+.mbox textarea:focus {
+  border-color: var(--crimson);
+}
+
+.mbox textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.mbtns {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+  margin-top: 1.3rem;
+}
+
+.mcancel,
+.msend {
+  padding: 0.55rem 1.1rem;
+  border-radius: 1px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+}
+
+.mcancel {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink-s);
+}
+
+.msend {
+  padding-inline: 1.4rem;
+  border: 1px solid var(--crimson);
+  background: var(--crimson);
+  color: #fff;
+  transition: background 0.2s;
+}
+
+.msend:hover {
+  background: var(--crimson-dk);
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(26, 23, 20, 0.9);
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 2px;
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  border: none;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 2rem;
+  line-height: 1;
+  opacity: 0.8;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+}
+
+.lightbox-nav {
+  position: fixed;
+  top: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  transform: translateY(-50%);
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.8rem;
+  line-height: 1;
+  opacity: 0.85;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 1;
+}
+
+.lightbox-prev {
+  left: 1rem;
+}
+
+.lightbox-next {
+  right: 1rem;
+}
+
+.lightbox-counter {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  display: none;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}

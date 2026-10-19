@@ -1,0 +1,55 @@
+{
+  "kurse": {
+    "eyebrow": "Laufende Kurse · Gütersloh",
+    "title": "Mal- & Kreativkurse",
+    "description": "In kleinen Gruppen von maximal 6 Personen wird gemalt, gezeichnet und experimentiert — individuell gefördert, in entspannter Atmosphäre. Ein Einstieg ist jederzeit möglich.",
+    "hinweis": "Schnupperstunde nach Absprache möglich. · Kein Unterricht an gesetzlichen Feiertagen und in den Schulferien (für Kinder/Jugendliche). · Ausgefallene Stunden im Verantwortungsbereich der Malschule können nach Absprache nachgeholt werden.",
+    "zeiten": [
+      { "tag": "Donnerstags", "zeit": "16:15 – 17:45 Uhr", "detail": "Kinder ab 11 Jahren · max. 6 Personen · fortlaufend" },
+      { "tag": "Montags",     "zeit": "18:00 – 19:30 Uhr", "detail": "Erwachsene · individuelle Förderung · max. 6, mind. 3 Personen" }
+    ],
+    "termine": {
+      "jahr": 2026,
+      "monate": [
+        { "monat": 3, "tage": [13, 20, 27] },
+        { "monat": 4, "tage": [4, 11, 18] },
+        { "monat": 5, "tage": [1, 8, 15, 22] },
+        { "monat": 6, "tage": [6, 13] }
+      ]
+    },
+    "preise": [
+      { "label": "Kreativkurs Kinder (Do.)", "wert": "49,50 €", "detail": "pro Monat · zzgl. Leinwände · auch in Ferienzeiten" },
+      { "label": "Malkurs Erwachsene (Mo.)", "wert": "19,00 €", "detail": "je Termin · Material inklusive" },
+      { "label": "Schnupperstunde",          "wert": "12,00 €", "detail": "einmalig · nach Absprache" },
+      { "label": "Einzelstunden (60 min)",   "wert": "ab 14,50 €", "detail": "je nach Personenzahl · Material inklusive" }
+    ],
+    "einzelstunden": [
+      { "personen": "1 Person",    "preis": "41,00 €" },
+      { "personen": "2 Personen",  "preis": "je 24,00 €" },
+      { "personen": "3 Personen",  "preis": "je 19,50 €" },
+      { "personen": "4 Personen",  "preis": "je 16,50 €" },
+      { "personen": "5 Personen",  "preis": "je 15,50 €" },
+      { "personen": "6 Personen",  "preis": "je 14,50 €" }
+    ],
+    "einzelstunden_note": "3 Einzelstunden oder 2 × 1,5 Std.: 1 Person 90,00 € · 2 Personen je 60,00 €"
+  },
+  "geburtstag": {
+    "eyebrow": "Besondere Anlässe · ab 7 Jahren",
+    "title": "Kindergeburtstage",
+    "description": "Ein Kindergeburtstag im Atelier ist ein unvergessliches Erlebnis — kreativ, bunt und ganz persönlich. Jedes Kind nimmt sein eigenes Kunstwerk mit nach Hause.",
+    "text1": "Kindergeburtstagsfeiern im Atelier sind nach Absprache freitags bis sonntags, dienstags sowie in den Schulferien möglich.",
+    "text2": "Lernen Sie mich und die Atmosphäre im Atelier bei einem vorherigen Besuch kennen — gerne zeige ich Ihnen viele Möglichkeiten, den Geburtstag zu gestalten. Es ist sicherlich etwas dabei, was Sie und Ihr Kind begeistert!",
+    "text3": "Selbstverständlich dürfen Sie etwas zu Essen und Trinken für eine kleine Pause mitbringen. Bitte ca. 3 Stunden einplanen — falls ein Kind etwas mehr Zeit benötigt, kann es sein Werk natürlich noch fertigstellen.",
+    "preise": [
+      { "label": "Kindergeburtstag (bis 10 Kinder)", "wert": "130,00 €", "detail": "zzgl. 6–12 € Material/Kind je nach Angebot · jedes weitere Kind 13 €" },
+      { "label": "Jedes weitere Kind",               "wert": "13,00 €",  "detail": "Outdoor-Möglichkeiten im Sommer nach Absprache" }
+    ]
+  },
+  "atelier": {
+    "eyebrow": "Rudolf-Harbig-Weg 3 · 33332 Gütersloh",
+    "title": "Das Atelier",
+    "description": "Zwei großzügige, hell eingerichtete Räume mit allem was das kreative Herz begehrt — von der Staffelei über die Werkbank bis hin zu Materialien für jede Technik.",
+    "text1": "Das Atelier in Gütersloh bietet Platz für Malerei, Zeichnung, Mischtechnik, Aquarell, Collage und Skulptur. Die bunten Schränke, Werkzeugwände und langen Arbeitstische schaffen eine Atmosphäre, in der Kreativität ganz natürlich entsteht.",
+    "text2": "Seit 2011 ist es der Ort, an dem Annette Gerke-Bischoff unterrichtet, forscht und selbst arbeitet."
+  }
+}

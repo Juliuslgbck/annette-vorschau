@@ -1,0 +1,50 @@
+.impressum-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 0;
+}
+
+.impressum-body h2 {
+  margin-bottom: 1.5rem;
+  color: var(--crimson);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.impressum-body h3 {
+  margin: 1.75rem 0 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border-crimson);
+  color: var(--crimson);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+.impressum-body p,
+.impressum-body li {
+  margin-bottom: 0.5rem;
+  color: var(--ink-s);
+  font-size: 0.83rem;
+  line-height: 1.8;
+}
+
+.impressum-body ul {
+  margin-bottom: 0.5rem;
+  padding-left: 1.2rem;
+}
+
+.impressum-body a {
+  color: var(--crimson);
+  text-decoration: none;
+}
+
+.impressum-body .contact-block {
+  margin-bottom: 1.5rem;
+  padding: 1.1rem 1.4rem;
+  border: 1px solid rgba(139, 34, 82, 0.18);
+  border-radius: 2px;
+  background: var(--paper-warm);
+}

@@ -1,0 +1,103 @@
+.kontakt-body {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 3rem;
+}
+
+.kontakt-body .eyebrow {
+  margin-bottom: 0.4rem;
+  color: var(--crimson);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.kontakt-body h2 {
+  margin-bottom: 0.75rem;
+  color: var(--crimson);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.kontakt-intro {
+  margin-bottom: 1.25rem;
+  color: var(--ink-s);
+  font-size: 0.87rem;
+  line-height: 1.75;
+}
+
+.kontakt-info {
+  margin-bottom: 2rem;
+  color: var(--ink-s);
+  font-size: 0.85rem;
+}
+
+.kontakt-info a {
+  color: var(--crimson);
+  text-decoration: none;
+}
+
+.kontakt-info span {
+  margin: 0 0.5rem;
+  color: var(--ink-f);
+}
+
+.kontakt-form .form-row {
+  margin-bottom: 1.1rem;
+}
+
+.kontakt-form label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--ink-s);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.kontakt-form input,
+.kontakt-form textarea {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.87rem;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.kontakt-form input:focus,
+.kontakt-form textarea:focus {
+  border-color: var(--crimson);
+}
+
+.kontakt-form textarea {
+  resize: vertical;
+}
+
+.kontakt-hp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.kontakt-status {
+  margin-top: 0.85rem;
+  font-size: 0.8rem;
+}
+
+.kontakt-status.is-success {
+  color: #3d6b3d;
+}
+
+.kontakt-status.is-error {
+  color: var(--crimson);
+}

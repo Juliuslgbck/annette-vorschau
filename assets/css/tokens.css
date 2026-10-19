@@ -1,0 +1,83 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --crimson: #8b2252;
+  --crimson-dk: #6a1a3f;
+  --lila: #7c4a8c;
+  --lila-dk: #5c3568;
+  --ink: #1a1714;
+  --ink-s: #5a544e;
+  --ink-f: #9e9890;
+  --gold: #b5924a;
+  --gold-l: #e8d9bc;
+  --paper: #fff;
+  --paper-warm: #fdf9f7;
+  --border: rgba(26, 23, 20, 0.13);
+  --border-crimson: rgba(139, 34, 82, 0.2);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Jost", sans-serif;
+  --art-main: url("../../media/hero-background.jpg");
+
+  /* Getoenter Textur-Hintergrund (Nav/Hero/Footer) - Farbe variiert nicht je Theme */
+  --texture-image: url("../../media/Background.JPG");
+  --texture-overlay: rgba(250, 247, 243, 0.55);
+}
+
+/*
+  Akzentfarbe: ergaenzt das feste Beere-Rot (--crimson) sparsam bei
+  Primaer-Buttons und Eyebrow-Texten. Ueber [data-theme] auf <html> umschaltbar
+  (siehe partials/bootstrap.php: SITE_THEME) - Wechsel passiert an einer
+  Stelle, nicht in jeder CSS-Datei einzeln.
+*/
+:root[data-theme="oliv"] {
+  --accent: #7d8968;
+  --accent-text: #55603f;
+  --accent-contrast: #fff;
+  --page-tint: #e4e8dc;
+}
+
+:root[data-theme="orange"] {
+  --accent: #e6bc7b;
+  --accent-text: #9c6a22;
+  --accent-contrast: #3a2a10;
+  --page-tint: #f5ead4;
+}
+
+:root[data-theme="tuerkis"] {
+  --accent: #6acdbb;
+  --accent-text: #2c7d6d;
+  --accent-contrast: #0f3a33;
+  --page-tint: #dcefe9;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}

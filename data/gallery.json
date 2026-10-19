@@ -1,0 +1,737 @@
+{
+    "styles": [
+        {
+            "id": "innenwelten",
+            "name": "Malereien",
+            "description": "Emotionale und psychologische Zustände — Ausdruck von Gefühlen, Erinnerungen und inneren Konflikten.",
+            "thumbnail": "uploads/works/11-mischtechnik-auf-papier-50-cm-x-65-cmi.jpg"
+        },
+        {
+            "id": "natur",
+            "name": "Natur & Stille",
+            "description": "Pflanzen, Tiere und Landschaften — die stille Schönheit der natürlichen Welt.",
+            "thumbnail": "uploads/works/dsc04695-stillleben-blumen-50-x-60.jpg"
+        },
+        {
+            "id": "menschen",
+            "name": "Menschen & Begegnungen",
+            "description": "Figuren, Beziehungen und menschliche Verbindungen — von zart bis komplex.",
+            "thumbnail": "uploads/works/dsc07227a-kopie.jpg"
+        },
+        {
+            "id": "transit",
+            "name": "Transit-Serie",
+            "description": "Eine zusammenhängende Werkserie über Übergänge, Vergänglichkeit und den Kreislauf des Lebens.",
+            "thumbnail": "uploads/works/dsc06114a-kopie.jpg"
+        },
+        {
+            "id": "collage",
+            "name": "Collage & Zeichnung",
+            "description": "Experimentelle Techniken — Schichten, Papier und grafische Linienarbeit.",
+            "thumbnail": "uploads/works/dsc06026ab-b-ume-i-27-x-30.jpg"
+        },
+        {
+            "id": "realistisch",
+            "name": "Realistische Malerei",
+            "description": "Gegenständliche Werke in Öl und Acryl — klassische Stillleben, Tiere und Natur.",
+            "thumbnail": "uploads/works/bilder-annette-055-kopie.jpg"
+        },
+        {
+            "id": "skulptur",
+            "name": "Skulptur",
+            "description": "Dreidimensionale Arbeit in Holz — Plastik als Erweiterung der malerischen Praxis.",
+            "thumbnail": "uploads/works/dsc04692-skulptur-k.jpg"
+        },
+        {
+            "id": "aquarelle_1783282675229",
+            "name": "Aquarelle",
+            "description": "Meine Sammlung an Aquarellen",
+            "thumbnail": "uploads/6mischtechnikaufpapier75cmx105cm_6a4abbecc9e1d.jpg"
+        }
+    ],
+    "works": [
+        {
+            "id": "w1",
+            "styleId": "innenwelten",
+            "title": "\"Tulpen\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 50×65 cm",
+            "description": "Zwischen Selbstwahrnehmung und äußerem Blick — eine ehrliche Erkundung der eigenen Identität in kräftigen Mischtechnik-Schichten.",
+            "sold": true,
+            "images": [
+                "uploads/works/11-mischtechnik-auf-papier-50-cm-x-65-cmi.jpg",
+                "uploads/dsc07206ad_6a4a507d18772.jpg"
+            ]
+        },
+        {
+            "id": "w2",
+            "styleId": "innenwelten",
+            "title": "\"Aggression\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 50×65 cm",
+            "description": "Die Farben explodieren förmlich — ein ungeschönter Ausdruck roher Kraft und der Energie, die hinter dem Aufbegehren steckt.",
+            "sold": true,
+            "images": [
+                "uploads/works/4-mischtechnik-auf-papier-50-cm-x-65-cm.jpg"
+            ]
+        },
+        {
+            "id": "w3",
+            "styleId": "innenwelten",
+            "title": "\"Leben u. Tod\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 60×65 cm",
+            "description": "Der ewige Kreislauf, verdichtet auf Papier — Vergänglichkeit und Lebendigkeit als untrennbares Paar.",
+            "sold": true,
+            "images": [
+                "uploads/works/5-mischtechnik-auf-papier-50-cm-x-65-cm.jpg"
+            ]
+        },
+        {
+            "id": "w4",
+            "styleId": "innenwelten",
+            "title": "\"Lebensweg\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 60×65 cm",
+            "description": "Verschlungene Linien und Farbfelder erzählen von der Komplexität menschlicher Biographien — kein Weg ist gerade.",
+            "sold": false,
+            "images": [
+                "uploads/works/8-mischtechnik-auf-papier-50-cm-x-65-cm.jpg"
+            ]
+        },
+        {
+            "id": "w5",
+            "styleId": "innenwelten",
+            "title": "\"Balance\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 60×65 cm",
+            "description": "Das fragile Gleichgewicht zwischen Gegensätzen, eingefangen im Moment des Innehaltens — eine stille Frage nach dem Mittelpunkt.",
+            "sold": false,
+            "images": [
+                "uploads/works/3-mischtechnik-auf-papier-50-cm-x-65-cm.jpg"
+            ]
+        },
+        {
+            "id": "w6",
+            "styleId": "innenwelten",
+            "title": "\"Vergessen\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 60×65 cm",
+            "description": "Was verblasst und was bleibt — eine stille Meditation über Erinnerung, Verlust und die Spuren, die Zeit hinterlässt.",
+            "sold": false,
+            "images": [
+                "uploads/works/1-mischtechnik-auf-papier-50-cm-x-65-cm.jpg"
+            ]
+        },
+        {
+            "id": "w7",
+            "styleId": "innenwelten",
+            "title": "\"Gefangen\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 60×65 cm",
+            "description": "Eingeschlossene Formen drücken das Gefühl der Enge aus, wenn innere oder äußere Umstände den Raum nehmen.",
+            "sold": false,
+            "images": [
+                "uploads/works/2-mischtechnik-auf-papier-50-cm-x-65-cm.jpg"
+            ]
+        },
+        {
+            "id": "w8",
+            "styleId": "innenwelten",
+            "title": "\"Der Wille ist des Menschen Himmelreich\"",
+            "technique": "Mischtechnik · 60×65 cm",
+            "description": "Die bildnerische Umsetzung des Gedankens, dass innere Stärke und Entschlossenheit alle äußeren Grenzen zu überwinden vermögen.",
+            "sold": false,
+            "images": [
+                "uploads/works/9-mischtechnik-auf-papier-50-cm-x-65-cm.jpg"
+            ]
+        },
+        {
+            "id": "w9",
+            "styleId": "innenwelten",
+            "title": "\"Eingebunden\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 75×105 cm",
+            "description": "Verflechtungen, Bindungen, Verbindlichkeiten — das Werk fragt auf großem Format, wo Geborgenheit endet und Einengung beginnt.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict7874a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w10",
+            "styleId": "innenwelten",
+            "title": "\"Lebensspur\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 75×105 cm",
+            "description": "Spuren, die wir hinterlassen — auf Papier und im Leben anderer. Das großformatige Werk lädt zum Nachdenken über das eigene Hinterlassen ein.",
+            "sold": false,
+            "images": [
+                "uploads/works/6-mischtechnik-auf-papier-75-cm-x-105-cm.jpg"
+            ]
+        },
+        {
+            "id": "w11",
+            "styleId": "innenwelten",
+            "title": "\"Verlorene Geborgenheit\"",
+            "technique": "Aquarell · 50×65 cm",
+            "description": "Das Aquarell trägt eine zarte Trauer — der Verlust von Sicherheit und Wärme, die einst selbstverständlich schienen.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06408a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w12",
+            "styleId": "innenwelten",
+            "title": "\"Armut\"",
+            "technique": "Aquarell · 60×65 cm",
+            "description": "Kein Vorwurf, sondern ein Hinsehen — das Werk lädt ein, Würde und Verletzlichkeit in einem einzigen Blick wahrzunehmen.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06386a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w13",
+            "styleId": "innenwelten",
+            "title": "\"Verlorene Liebe\"",
+            "technique": "Aquarell · 60×65 cm",
+            "description": "Fließende Aquarellfarben drücken aus, was Worte kaum fassen können — das stille Nachklingen einer verlorenen Verbindung.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06410a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w14",
+            "styleId": "innenwelten",
+            "title": "\"Missbrauch\"",
+            "technique": "Aquarell · 60×65 cm",
+            "description": "Ein schwieriges Thema mit künstlerischer Kraft angesprochen — das Werk fordert Aufmerksamkeit, Mitgefühl und das Recht auf Gehör.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06380a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w15",
+            "styleId": "innenwelten",
+            "title": "\"Auf den Kopf gestellt\"",
+            "technique": "Mischtechnik auf Papier · 68×93 cm",
+            "description": "Wenn alles aus den Fugen gerät — die gewohnte Perspektive wird radikal umgekehrt und fordert einen neuen Blick auf Vertrautes.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0165-a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w16",
+            "styleId": "innenwelten",
+            "title": "\"Gefangene Träume\"",
+            "technique": "Mischtechnik auf Papier · 68×93 cm",
+            "description": "Träume, die nicht Wirklichkeit werden durften — eingeschlossen, aber nie ganz erloschen. Das Werk lässt Raum für eigene Projektionen.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0163-a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w17",
+            "styleId": "innenwelten",
+            "title": "\"Ausgeschlossen\"",
+            "technique": "Aquarell auf Papier · 43×65 cm",
+            "description": "Das Außenstehen, das Nichtdazugehören — universell erlebt, persönlich schmerzhaft und im Aquarell mit offener Ehrlichkeit gefasst.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0162a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w18",
+            "styleId": "natur",
+            "title": "\"Die stolze Rose\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 60×65 cm",
+            "description": "Eine Rose in voller Pracht — Schönheit, die sich selbst behauptet, mit Leuchtkraft und Würde auf Aquarellpapier festgehalten.",
+            "sold": false,
+            "images": [
+                "uploads/works/10-mischtechnik-auf-papier-50-cm-x-65-cm.jpg"
+            ]
+        },
+        {
+            "id": "w19",
+            "styleId": "natur",
+            "title": "\"Blumenstillleben\"",
+            "technique": "Mischtechnik auf Leinwand · 50×60 cm",
+            "description": "Das klassische Motiv neu gedacht — Blumen als Träger von Vergänglichkeit, Fülle und der stillen Schönheit des Augenblicks.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc04695-stillleben-blumen-50-x-60.jpg"
+            ]
+        },
+        {
+            "id": "w20",
+            "styleId": "natur",
+            "title": "\"Stillleben Blumen\"",
+            "technique": "Aquarell · 47,5×62,7 cm",
+            "description": "Sanfte Aquarellfarben umhüllen die Blüten mit einem fast ätherischen Licht, das zwischen Zartheit und Lebendigkeit schwebt.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc07509-2-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w21",
+            "styleId": "natur",
+            "title": "\"Stillleben Garten\"",
+            "technique": "Aquarell",
+            "description": "Ein Garten-Moment, der Ruhe ausstrahlt — das genaue Hinsehen auf das vermeintlich Unscheinbare und seine stille Würde.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0155-a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w22",
+            "styleId": "natur",
+            "title": "\"Stillleben Fenster Blumenpferde\"",
+            "technique": "Aquarell auf Papier",
+            "description": "Eine poetische Verbindung von Innen und Außen — Natur trifft auf Raum, Blumen begegnen dem Tageslicht am Fenster.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0246-b-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w23",
+            "styleId": "natur",
+            "title": "\"Park Grassau\"",
+            "technique": "Aquarell auf Papier",
+            "description": "Licht und Schatten im Park — ein atmosphärischer Moment, der in fließendem Aquarell die Stille eines Nachmittags einfängt.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0158-a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w24",
+            "styleId": "natur",
+            "title": "\"Tukan\"",
+            "technique": "Aquarell",
+            "description": "Der exotische Vogel als Studienobjekt — Faszination für Form, lebhafte Farbe und die Schönheit des Fremden im Aquarell.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0152-a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w25",
+            "styleId": "natur",
+            "title": "\"Aus Altem wächst was Neues\"",
+            "technique": "Mischtechnik auf Leinwand · 30×100 cm",
+            "description": "Das ungewöhnliche Hochformat unterstreicht die Idee des Aufstrebens — aus dem Vergangenen und Abgestorbenen wächst neues Leben.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06090c-30-x-100.jpg"
+            ]
+        },
+        {
+            "id": "w26",
+            "styleId": "natur",
+            "title": "\"Delphin\"",
+            "technique": "Mischtechnik auf Kappalplatte · 70×100 cm",
+            "description": "Die elegante Bewegung des Delphins, verdichtet in einer expressiven Komposition — Freiheit, Leichtigkeit und das Element Wasser.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict5910-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w27",
+            "styleId": "menschen",
+            "title": "\"Auge in Auge\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 60×65 cm",
+            "description": "Direktheit und Verletzlichkeit zugleich — dieser Blick lässt sich nicht ausweichen. Begegnung als intensivster Augenblick.",
+            "sold": false,
+            "images": [
+                "uploads/works/7-mischtechnik-auf-papier-50-cm-x-65-cm.jpg"
+            ]
+        },
+        {
+            "id": "w28",
+            "styleId": "menschen",
+            "title": "\"Bewegung\"",
+            "technique": "Mischtechnik auf Leinwand · 80×120 cm",
+            "description": "Körper in Bewegung als Ausdruck von Lebendigkeit und Freiheit — das großformatige Werk pulsiert mit Energie und Dynamik.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict9027a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w29",
+            "styleId": "menschen",
+            "title": "\"Gemeinsam\"",
+            "technique": "Mischtechnik auf Leinwand · 80×110 cm",
+            "description": "Zwei Menschen, ein Weg — die Kraft der Gemeinschaft in expressiver Malerei. Nähe, die sich im Bild spürbar macht.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc07227a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w30",
+            "styleId": "menschen",
+            "title": "\"Das Paar\"",
+            "technique": "Mischtechnik auf Leinwand · 70×120 cm",
+            "description": "Die Beziehung zwischen zwei Menschen, in Form und Raum ausbalanciert — Spannung und Harmonie in einem Atemzug.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict1162a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w31",
+            "styleId": "menschen",
+            "title": "\"Verbunden\"",
+            "technique": "Mischtechnik auf Leinwand · 70×110 cm",
+            "description": "Unsichtbare Fäden verbinden uns — das Werk macht spürbar, was man nicht sehen kann: die zärtliche Kraft menschlicher Verbundenheit.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict1166a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w32",
+            "styleId": "menschen",
+            "title": "\"Beziehungen\"",
+            "technique": "Mischtechnik auf Leinwand · 60×80 cm",
+            "description": "Ein Geflecht aus Nähe und Distanz, Zuneigung und Reibung — das Werk zeigt, wie vielschichtig menschliche Bindungen sind.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0071a.jpg"
+            ]
+        },
+        {
+            "id": "w33",
+            "styleId": "menschen",
+            "title": "\"Beschützt\"",
+            "technique": "Mischtechnik auf Leinwand · 80×80 cm",
+            "description": "Das Gefühl des Gehalten-Seins — warm, sicher, geborgen. Das Werk feiert jene Momente, in denen man sich wirklich aufgehoben fühlt.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict1085a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w34",
+            "styleId": "menschen",
+            "title": "\"Puppen mit Schlüssel\"",
+            "technique": "Mischtechnik auf Kappalplatte · 70×100 cm",
+            "description": "Figuren und Symbole auf großem Format — eine Metapher über Kontrolle, die Frage nach dem Schlüssel und dem Weg zur Befreiung.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict7339a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w35",
+            "styleId": "menschen",
+            "title": "\"Froschkönig u. Froschkönigin\"",
+            "technique": "Mischtechnik auf Leinwand · 80×80 cm",
+            "description": "Das bekannte Märchen in einer eigenwilligen Interpretation — spielerisch und tiefgründig, voller Symbolik über Wandlung und Akzeptanz.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict1087a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w36",
+            "styleId": "menschen",
+            "title": "\"Froschkönig\"",
+            "technique": "Mischtechnik auf Leinwand · 60×80 cm",
+            "description": "Die einzelne Märchenfigur zwischen zwei Welten — zwischen dem, was man war, und dem, was man werden kann.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06088ab.jpg"
+            ]
+        },
+        {
+            "id": "w37",
+            "styleId": "menschen",
+            "title": "\"Angezogen\"",
+            "technique": "Aquarell auf Papier",
+            "description": "Die magnetische Kraft zwischen Menschen — was uns zueinander zieht, ohne dass wir es benennen oder erklären könnten.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0241-a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w38",
+            "styleId": "menschen",
+            "title": "\"Zwei.....\"",
+            "technique": "Acryl auf Leinwand · 60×80 cm",
+            "description": "Zwei Figuren, viele offene Fragen — das Werk lässt Distanz und Nähe, Abschied und Annäherung gleichzeitig im Raum stehen.",
+            "sold": false,
+            "images": [
+                "uploads/works/bilder-annette-020-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w39",
+            "styleId": "menschen",
+            "title": "\"Verdreht\"",
+            "technique": "Aquarell auf Acrylpapier · 70×95 cm",
+            "description": "Wenn Wahrnehmung und Wirklichkeit auseinandergeraten — das Aquarell spielt mit Perspektive und der Frage, was uns den Blick verstellt.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict5913-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w40",
+            "styleId": "menschen",
+            "title": "\"Der Kamm\"",
+            "technique": "Aquarell auf Acrylpapier · 70×95 cm",
+            "description": "Ein alltäglicher Gegenstand als Spiegel von Identität und Erinnerung — das Vertraute wird zum Träger persönlicher Geschichte.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0233-a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w41",
+            "styleId": "menschen",
+            "title": "\"Der Traum\"",
+            "technique": "Aquarell auf Papier · 68×93 cm",
+            "description": "Im Traum lösen sich Grenzen auf — eine atmosphärische Reise zwischen Realem und Imaginiertem, in fließenden Aquarellfarben.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict5906-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w42",
+            "styleId": "transit",
+            "title": "\"Transit\"",
+            "technique": "Mischtechnik auf Papier auf Holz · 70×70 cm",
+            "description": "Der Ausgangspunkt der Serie — Übergänge als Grundthema menschlicher Existenz, materiell verdichtet auf Papier und Holz.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06114a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w43",
+            "styleId": "transit",
+            "title": "\"Transit Human\"",
+            "technique": "Mischtechnik auf Papier auf Holz · 70×70 cm",
+            "description": "Der Mensch als Reisender zwischen Zuständen, Rollen und Lebensabschnitten — niemals ganz angekommen, immer im Werden.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06103a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w44",
+            "styleId": "transit",
+            "title": "\"Transit Fauna\"",
+            "technique": "Mischtechnik auf Papier auf Holz · 70×70 cm",
+            "description": "Auch die Tierwelt kennt keine festen Grenzen — Migration, Anpassung und der ewige Wandel der Arten im Bild.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06108a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w45",
+            "styleId": "transit",
+            "title": "\"Transit Flora\"",
+            "technique": "Mischtechnik auf Papier auf Holz · 70×70 cm",
+            "description": "Pflanzen wachsen, vergehen und kehren wieder — der pflanzliche Kreislauf als stilles Gleichnis für alles Vergängliche.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06097a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w46",
+            "styleId": "transit",
+            "title": "\"+Toter Vogel\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 34,8×26,8 cm",
+            "description": "Ein gefundenes, sorgfältig dokumentiertes Wesen — der Tod als selbstverständlicher Teil des Lebens, still und würdevoll festgehalten.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06972b-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w47",
+            "styleId": "transit",
+            "title": "\"+Tote Motte\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 16,5×22,5 cm",
+            "description": "Kleine Wesen, großes Staunen — die Vergänglichkeit im kleinen Maßstab, mit wissenschaftlicher Genauigkeit und künstlerischer Zartheit.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06971b-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w48",
+            "styleId": "transit",
+            "title": "\"+Toter Maikäfer\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 6,9×34,7 cm",
+            "description": "Präzise beobachtet und mit Mitgefühl festgehalten — das Ende eines Lebens im ungewöhnlichen Hochformat.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06968b-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w49",
+            "styleId": "transit",
+            "title": "\"+Tote Wanze\"",
+            "technique": "Mischtechnik auf Aquarellpapier · 9,8×26,7 cm",
+            "description": "Die naturkundliche Betrachtung trifft auf künstlerische Reflexion — das Winzige wird groß und die Endlichkeit sichtbar.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06965b-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w50",
+            "styleId": "collage",
+            "title": "\"Bäume I\"",
+            "technique": "Collage auf Papier · 19,5×26 cm",
+            "description": "Bäume aus Collagepapier zusammengefügt — das Fragmentarische ergibt ein lebendiges Ganzes, das mehr ist als die Summe seiner Teile.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06026ab-b-ume-i-27-x-30.jpg"
+            ]
+        },
+        {
+            "id": "w51",
+            "styleId": "collage",
+            "title": "\"Bäume II\"",
+            "technique": "Collage auf Papier · 19,5×26 cm",
+            "description": "Eine Variation des Themas — andere Schichten, anderes Licht, derselbe stille Kraftort zwischen Wachstum und Bestandsaufnahme.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc06025ab-b-ume-ii-27-x-30.jpg"
+            ]
+        },
+        {
+            "id": "w52",
+            "styleId": "collage",
+            "title": "\"Rosenkranz\"",
+            "technique": "Bleistift / Buntstift auf Papier",
+            "description": "Mit Bleistift und Buntstift — eine intime Zeichnung voller spiritueller Stille, die das Vertraute zum Meditationsobjekt macht.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0156-a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w53",
+            "styleId": "collage",
+            "title": "\"Stiefel\"",
+            "technique": "Bleistift / Rötel auf Papier · 50×65 cm",
+            "description": "Das Alltagsobjekt als Protagonist — in Rötel und Bleistift mit Respekt und Neugier betrachtet, das Getragene trägt Spuren.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict7343a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w54",
+            "styleId": "collage",
+            "title": "\"Stillleben Schuhe\"",
+            "technique": "Aquarell",
+            "description": "Schuhe tragen Geschichten — wer hat sie getragen, wohin sind sie gegangen? Das Aquarell lädt ein, sich das vorzustellen.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict0161-a-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w55",
+            "styleId": "realistisch",
+            "title": "\"Löwe im Schnee\"",
+            "technique": "Öl auf Leinwand · 50×60 cm",
+            "description": "Majestät in ungewohnter Umgebung — der König der Tiere im Schnee, zerbrechlich und erhaben zugleich, mit meisterlicher Ölmalerei eingefangen.",
+            "sold": false,
+            "images": [
+                "uploads/works/bilder-annette-055-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w56",
+            "styleId": "realistisch",
+            "title": "\"Stillleben Pinsel u. Farbe\"",
+            "technique": "Öl auf Leinwand · 50×60 cm",
+            "description": "Das Atelier als Motiv — die Werkzeuge der Malerin im Bild selbst. Eine Reflexion über das Handwerk und die Liebe zur Malerei.",
+            "sold": false,
+            "images": [
+                "uploads/works/bilder-annette-050-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w57",
+            "styleId": "realistisch",
+            "title": "\"Wasserspiegelung\"",
+            "technique": "Öl auf Leinwand · 60×80 cm",
+            "description": "Die Wasseroberfläche als Spiegel und Rätsel zugleich — Realität und Reflexion werden ununterscheidbar, das Bild verdoppelt sich.",
+            "sold": false,
+            "images": [
+                "uploads/works/bilder-annette-016-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w58",
+            "styleId": "realistisch",
+            "title": "\"Aufgetischt\"",
+            "technique": "Öl auf Leinwand · 60×80 cm",
+            "description": "Ein Stillleben mit Sinn für Komposition und das Schöne im Alltäglichen — das Gedeckte als Einladung, innezuhalten und zu genießen.",
+            "sold": false,
+            "images": [
+                "uploads/works/bilder-annette-045-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w59",
+            "styleId": "realistisch",
+            "title": "\"Zerteilt\"",
+            "technique": "Öl auf Leinwand · 70×100 cm",
+            "description": "Eine ungewöhnliche Perspektive auf vertraute Formen — das Zerschneiden als gestalterisches Mittel, das neue Sichtweisen eröffnet.",
+            "sold": false,
+            "images": [
+                "uploads/works/bilder-annette-166-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w60",
+            "styleId": "realistisch",
+            "title": "\"Flower Power\"",
+            "technique": "Mischtechnik auf Leinwand · 60×80 cm",
+            "description": "Blumen in Öl — lebendig, farbenfroh, ein Fest für die Sinne. Das Werk strahlt Freude und eine ungebändigte Lust an der Farbe aus.",
+            "sold": false,
+            "images": [
+                "uploads/works/pict5908-kopie.jpg"
+            ]
+        },
+        {
+            "id": "w61",
+            "styleId": "skulptur",
+            "title": "Skulptur K",
+            "technique": "Kirschholz · Höhe ca. 61 cm",
+            "description": "Kirschholz, von Hand bearbeitet und in Form gebracht — das warme Holz gibt der Figur Lebendigkeit und eine organische, atmende Präsenz.",
+            "sold": false,
+            "images": [
+                "uploads/works/dsc04692-skulptur-k.jpg"
+            ]
+        },
+        {
+            "id": "w1783282830278",
+            "styleId": "aquarelle_1783282675229",
+            "title": "Aquarell Fahrrad",
+            "technique": "Aquarell - 50*50",
+            "description": "Zwei Räder, zwei Leben — in einem Wirrwarr aus Türkis und Feuer verschmelzen Figur und Fortbewegung zu einer einzigen Bewegung. Die Farben rinnen ineinander wie Gedanken ohne Ziel, während die feinen Speichen hart und bestimmt in diesem Chaos bestehen bleiben.",
+            "images": [
+                "uploads/6mischtechnikaufpapier75cmx105cm_6a4abc8311d45.jpg"
+            ],
+            "sold": false
+        }
+    ]
+}
