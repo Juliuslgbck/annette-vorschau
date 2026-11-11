@@ -1,29 +1,29 @@
 .ueber-body {
-  max-width: 760px;
+  max-width: 980px;
   margin: 0 auto;
   padding: 2.5rem 2rem 0;
 }
 
 .ueber-hero {
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 230px 1fr;
   gap: 2.5rem;
   margin-bottom: 2.5rem;
   padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
 }
 
 .ueber-portrait {
   width: 100%;
   aspect-ratio: 3 / 4;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   object-fit: cover;
   object-position: center top;
 }
 
 .ueber-intro .eyebrow {
   margin-bottom: 0.4rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-size: 0.6rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -31,7 +31,7 @@
 
 .ueber-intro h2 {
   margin-bottom: 0.7rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 400;
@@ -40,7 +40,7 @@
 
 .ueber-intro p {
   margin-bottom: 0.7rem;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.87rem;
   line-height: 1.75;
 }
@@ -48,8 +48,8 @@
 .ueber-intro blockquote {
   margin: 1.2rem 0;
   padding-left: 1rem;
-  border-left: 2px solid var(--crimson);
-  color: var(--ink);
+  border-left: 2px solid var(--brand);
+  color: var(--text);
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-style: italic;
@@ -59,7 +59,7 @@
 .ueber-intro blockquote cite {
   display: block;
   margin-top: 0.35rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-body);
   font-size: 0.63rem;
   font-style: normal;
@@ -68,16 +68,42 @@
 }
 
 .ueber-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+}
+
+/* Jede Zeile: Text + Foto(s), abwechselnd Foto rechts / links. */
+.ueber-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem 2.5rem;
+  align-items: start;
+  gap: 2.5rem;
+}
+
+.ueber-section:nth-child(even) .ueber-text {
+  order: 2;
+}
+
+.ueber-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ueber-photos img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 2px;
 }
 
 .ueber-section h3 {
   margin-bottom: 0.85rem;
   padding-bottom: 0.45rem;
-  border-bottom: 1px solid var(--border-crimson);
-  color: var(--crimson);
+  border-bottom: 1px solid var(--line-brand);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-style: italic;
@@ -94,7 +120,7 @@
   gap: 0.4rem;
   padding: 0.28rem 0;
   border-bottom: 1px solid rgba(26, 23, 20, 0.05);
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.8rem;
   line-height: 1.5;
 }
@@ -105,33 +131,33 @@
 
 .timeline .yr {
   padding-top: 1px;
-  color: var(--crimson);
+  color: var(--brand);
   font-size: 0.68rem;
 }
 
 .ueber-contact {
   margin-top: 2rem;
   padding: 1.25rem 1.5rem;
-  border: 1px solid var(--border-crimson);
+  border: 1px solid var(--line-brand);
   border-radius: 2px;
-  background: var(--paper-warm);
+  background: var(--bg-strong);
 }
 
 .ueber-contact h3 {
   margin-bottom: 0.55rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: 1.05rem;
   font-style: italic;
 }
 
 .ueber-contact p {
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.82rem;
   line-height: 1.85;
 }
 
 .ueber-contact a {
-  color: var(--crimson);
+  color: var(--brand);
   text-decoration: none;
 }

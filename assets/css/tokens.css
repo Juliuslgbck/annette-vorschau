@@ -5,62 +5,49 @@
 }
 
 html {
+  font-size: 112.5%; /* Basis 18px statt 16px: alle rem-Schriftgroessen werden einheitlich groesser */
   scroll-behavior: smooth;
 }
 
+/*
+  Alle Farben der Website - hier und nur hier aendern.
+  Schema: Flaechen (bg-*), Text (text-*), Markenfarben (brand*, accent), Linien (line*).
+*/
 :root {
-  --crimson: #8b2252;
-  --crimson-dk: #6a1a3f;
-  --lila: #7c4a8c;
-  --lila-dk: #5c3568;
-  --ink: #1a1714;
-  --ink-s: #5a544e;
-  --ink-f: #9e9890;
-  --gold: #b5924a;
-  --gold-l: #e8d9bc;
-  --paper: #fff;
-  --paper-warm: #fdf9f7;
-  --border: rgba(26, 23, 20, 0.13);
-  --border-crimson: rgba(139, 34, 82, 0.2);
+  /* Flaechen */
+  --bg:        rgb(255, 245, 226);               /* Seitenhintergrund */
+  --bg-strong: #fff;               /* Kaesten/Karten, Bildplatzhalter */
+  --bar-tint:  rgba(255, 245, 226, 0.8); /* Toenung ueber der Aquarell-Textur von Navigation + Fusszeile (Deckkraft = wie stark die Textur verschwindet) */
+  --bar-texture: url("../../media/Background.JPG");
+
+  /* Text */
+  --text:       #1a1714;              /* Haupttext */
+  --text-soft:  #5a544e;              /* Nebentext, Navigationslinks */
+  --text-faint: #9e9890;              /* Hinweise, Kleingedrucktes */
+
+  /* Marke */
+  --brand:      #8b2252;              /* Beere-Rot: Ueberschriften, aktive Links, Buttons */
+  --brand-dark: #6a1a3f;              /* Button-Hover */
+  --accent:     #7c4a8c;              /* Lila: Eyebrow-Texte, Fokus, Auswahl */
+
+  /* Kurskalender */
+  --cal-kinder:     #2a8078;            /* Kinderkurs (Teal) */
+  --cal-erwachsene: var(--brand);       /* Erwachsenenkurs (Beere) */
+  --cal-special:    #c9780a;            /* Besonderer Termin (Bernstein) */
+
+  /* Linien */
+  --line:       rgba(26, 23, 20, 0.13);
+  --line-brand: rgba(139, 34, 82, 0.2);
+
+  /* Schrift + Bild */
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "Jost", sans-serif;
-  --art-main: url("../../media/hero-background.jpg");
-
-  /* Getoenter Textur-Hintergrund (Nav/Hero/Footer) - Farbe variiert nicht je Theme */
-  --texture-image: url("../../media/Background.JPG");
-  --texture-overlay: rgba(250, 247, 243, 0.55);
-}
-
-/*
-  Akzentfarbe: ergaenzt das feste Beere-Rot (--crimson) sparsam bei
-  Primaer-Buttons und Eyebrow-Texten. Ueber [data-theme] auf <html> umschaltbar
-  (siehe partials/bootstrap.php: SITE_THEME) - Wechsel passiert an einer
-  Stelle, nicht in jeder CSS-Datei einzeln.
-*/
-:root[data-theme="oliv"] {
-  --accent: #7d8968;
-  --accent-text: #55603f;
-  --accent-contrast: #fff;
-  --page-tint: #e4e8dc;
-}
-
-:root[data-theme="orange"] {
-  --accent: #e6bc7b;
-  --accent-text: #9c6a22;
-  --accent-contrast: #3a2a10;
-  --page-tint: #f5ead4;
-}
-
-:root[data-theme="tuerkis"] {
-  --accent: #6acdbb;
-  --accent-text: #2c7d6d;
-  --accent-contrast: #0f3a33;
-  --page-tint: #dcefe9;
+  --hero-image: url("../../media/hero-background.jpg");
 }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--font-body);
   font-weight: 300;
   min-height: 100vh;

@@ -15,25 +15,25 @@
 
 /* Sekundaer: bestehender Stil, fuers feste Beere-Rot */
 .cta-btn--outline {
-  border: 1px solid var(--crimson);
+  border: 1px solid var(--brand);
   background: transparent;
-  color: var(--crimson);
+  color: var(--brand);
 }
 
 .cta-btn--outline:hover {
-  background: var(--crimson);
+  background: var(--brand);
   color: #fff;
 }
 
 /* Primaer: weiss gefuellt, mit Beere-Rot als Kontur/Text */
 .cta-btn--primary {
-  border: 1px solid var(--crimson);
+  border: 1px solid var(--brand);
   background: #fff;
-  color: var(--crimson);
+  color: var(--brand);
 }
 
 .cta-btn--primary:hover {
-  background: var(--crimson);
+  background: var(--brand);
   color: #fff;
 }
 
@@ -70,14 +70,14 @@
   max-height: 90vh;
   padding: 2rem;
   overflow-y: auto;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 2px;
   background: #fff;
 }
 
 .meyebrow {
   margin-bottom: 0.3rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-size: 0.6rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -85,7 +85,7 @@
 
 .mbox h3 {
   margin-bottom: 0.2rem;
-  color: var(--ink);
+  color: var(--text);
   font-family: var(--font-display);
   font-size: 1.35rem;
   font-style: italic;
@@ -95,15 +95,15 @@
 .mmeta {
   margin-bottom: 1.2rem;
   padding-bottom: 1.2rem;
-  border-bottom: 1px solid var(--border);
-  color: var(--ink-f);
+  border-bottom: 1px solid var(--line);
+  color: var(--text-faint);
   font-size: 0.75rem;
 }
 
 .mbox label {
   display: block;
   margin: 0.8rem 0 0.28rem;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.62rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -113,10 +113,10 @@
 .mbox textarea {
   width: 100%;
   padding: 0.55rem 0.7rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 1px;
   background: #fff;
-  color: var(--ink);
+  color: var(--text);
   font-family: var(--font-body);
   font-size: 0.86rem;
   font-weight: 300;
@@ -126,7 +126,7 @@
 
 .mbox input:focus,
 .mbox textarea:focus {
-  border-color: var(--crimson);
+  border-color: var(--brand);
 }
 
 .mbox textarea {
@@ -151,21 +151,21 @@
 }
 
 .mcancel {
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   background: transparent;
-  color: var(--ink-s);
+  color: var(--text-soft);
 }
 
 .msend {
   padding-inline: 1.4rem;
-  border: 1px solid var(--crimson);
-  background: var(--crimson);
+  border: 1px solid var(--brand);
+  background: var(--brand);
   color: #fff;
   transition: background 0.2s;
 }
 
 .msend:hover {
-  background: var(--crimson-dk);
+  background: var(--brand-dark);
 }
 
 .lightbox {

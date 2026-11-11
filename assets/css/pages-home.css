@@ -12,7 +12,7 @@
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: var(--art-main) center / cover;
+  background: var(--hero-image) center / cover;
 }
 
 .hero-gradient {
@@ -117,14 +117,14 @@
 
 .highlights-eyebrow {
   margin-bottom: 0.4rem;
-  color: var(--lila);
+  color: var(--accent);
   font-size: 0.68rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
 }
 
 .highlights-heading {
-  color: var(--ink);
+  color: var(--text);
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 4vw, 2.15rem);
   font-weight: 400;
@@ -133,7 +133,7 @@
 .highlights-link {
   padding-bottom: 3px;
   border-bottom: 1px solid rgba(124, 74, 140, 0.35);
-  color: var(--lila);
+  color: var(--accent);
   font-size: 0.68rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -160,4 +160,68 @@
 .highlights-item:hover {
   box-shadow: 0 8px 22px rgba(26, 23, 20, 0.12);
   transform: translateY(-3px);
+}
+
+.hero-ctas .cta-btn--primary {
+  border-color: transparent;
+}
+
+/* ── Aktuelles (partials/news.php) ── */
+.news {
+  padding: 0 4.5rem 3.75rem;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.4rem;
+}
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--bg-strong);
+}
+
+.news-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.news-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.1rem 1.3rem 1rem;
+}
+
+.news-period {
+  margin-top: auto;
+  padding-top: 0.9rem;
+  text-align: right;
+  color: var(--text-soft);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.news-title {
+  margin-bottom: 0.5rem;
+  color: var(--brand);
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.news-text {
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  line-height: 1.7;
 }

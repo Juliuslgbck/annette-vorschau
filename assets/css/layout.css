@@ -10,7 +10,7 @@
   top: 0;
   z-index: 500;
   overflow: hidden;
-  background: linear-gradient(var(--texture-overlay), var(--texture-overlay)), var(--texture-image) center / cover;
+  background: linear-gradient(var(--bar-tint), var(--bar-tint)), var(--bar-texture) center / cover;
   border-bottom: 1px solid rgba(26, 23, 20, 0.1);
 }
 
@@ -32,7 +32,7 @@
 
 .nav-brand-name {
   display: block;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: 1.4rem;
   font-weight: 500;
@@ -41,9 +41,9 @@
 .nav-brand-tag {
   display: block;
   margin-top: 0.25rem;
-  color: var(--ink-f);
-  font-size: 0.56rem;
-  letter-spacing: 0.3em;
+  color: var(--text);
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
@@ -57,9 +57,9 @@
 .nav-links a {
   padding-bottom: 4px;
   border-bottom: 2px solid transparent;
-  color: var(--ink-s);
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
+  color: var(--text);
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
   text-decoration: none;
   text-transform: uppercase;
   transition: color 0.2s, border-color 0.2s;
@@ -68,11 +68,11 @@
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--crimson);
+  color: var(--brand);
 }
 
 .nav-links a.active {
-  border-bottom-color: var(--crimson);
+  border-bottom-color: var(--brand);
 }
 
 .page {
@@ -99,8 +99,8 @@
 .site-footer {
   margin-top: 3rem;
   border-top: 1px solid rgba(139, 34, 82, 0.15);
-  background: linear-gradient(var(--texture-overlay), var(--texture-overlay)), var(--texture-image) center / cover;
-  color: var(--ink-s);
+  background: linear-gradient(var(--bar-tint), var(--bar-tint)), var(--bar-texture) center / cover;
+  color: var(--text);
 }
 
 .site-footer-cols {
@@ -114,14 +114,14 @@
 
 .site-footer-brand {
   margin-bottom: 0.4rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: 1.2rem;
 }
 
 .site-footer-heading {
   margin-bottom: 0.6rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-size: 0.62rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -145,7 +145,7 @@
 }
 
 .site-footer-links a.active {
-  color: var(--crimson);
+  color: var(--brand);
 }
 
 .site-footer-bottom {
@@ -153,13 +153,13 @@
   margin: 0 auto;
   padding: 1rem 2.5rem;
   border-top: 1px solid rgba(26, 23, 20, 0.1);
-  color: var(--ink-f);
+  color: var(--text);
   font-size: 0.66rem;
   letter-spacing: 0.05em;
   text-align: center;
 }
 
 .site-footer-bottom a {
-  color: var(--crimson);
+  color: var(--brand);
   text-decoration: none;
 }

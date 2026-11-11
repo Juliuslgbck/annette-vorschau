@@ -6,7 +6,7 @@
 
 .kontakt-body .eyebrow {
   margin-bottom: 0.4rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-size: 0.6rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -14,7 +14,7 @@
 
 .kontakt-body h2 {
   margin-bottom: 0.75rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 4vw, 2.2rem);
   font-style: italic;
@@ -23,25 +23,25 @@
 
 .kontakt-intro {
   margin-bottom: 1.25rem;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.87rem;
   line-height: 1.75;
 }
 
 .kontakt-info {
   margin-bottom: 2rem;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.85rem;
 }
 
 .kontakt-info a {
-  color: var(--crimson);
+  color: var(--brand);
   text-decoration: none;
 }
 
 .kontakt-info span {
   margin: 0 0.5rem;
-  color: var(--ink-f);
+  color: var(--text-faint);
 }
 
 .kontakt-form .form-row {
@@ -51,7 +51,7 @@
 .kontakt-form label {
   display: block;
   margin-bottom: 0.35rem;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -61,10 +61,10 @@
 .kontakt-form textarea {
   width: 100%;
   padding: 0.65rem 0.8rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 2px;
   background: #fff;
-  color: var(--ink);
+  color: var(--text);
   font-family: var(--font-body);
   font-size: 0.87rem;
   font-weight: 300;
@@ -74,7 +74,7 @@
 
 .kontakt-form input:focus,
 .kontakt-form textarea:focus {
-  border-color: var(--crimson);
+  border-color: var(--brand);
 }
 
 .kontakt-form textarea {
@@ -99,5 +99,5 @@
 }
 
 .kontakt-status.is-error {
-  color: var(--crimson);
+  color: var(--brand);
 }

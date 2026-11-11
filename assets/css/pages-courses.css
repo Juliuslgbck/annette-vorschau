@@ -9,7 +9,7 @@
   flex-wrap: wrap;
   gap: 0;
   margin-bottom: 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
 }
 
 .tab-btn {
@@ -18,7 +18,7 @@
   border: none;
   border-bottom: 2px solid transparent;
   background: none;
-  color: var(--ink-f);
+  color: var(--text-faint);
   cursor: pointer;
   font-family: var(--font-display);
   font-size: 1rem;
@@ -30,11 +30,11 @@
 
 .tab-btn:hover,
 .tab-btn.active {
-  color: var(--crimson);
+  color: var(--brand);
 }
 
 .tab-btn.active {
-  border-bottom-color: var(--crimson);
+  border-bottom-color: var(--brand);
 }
 
 .tab-panel {
@@ -50,12 +50,13 @@
 .panel-intro {
   margin-bottom: 1.75rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
 }
 
-.panel-eyebrow {
+.panel-intro .panel-eyebrow {
+  max-width: none; /* sonst gilt die 560px-Begrenzung der Fliesstexte und die Zeile bricht um */
   margin-bottom: 0.4rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-size: 0.6rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -63,7 +64,7 @@
 
 .panel-intro h2 {
   margin-bottom: 0.6rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 4vw, 2.2rem);
   font-weight: 400;
@@ -74,7 +75,7 @@
 .panel-body p {
   max-width: 560px;
   margin-bottom: 0.6rem;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.87rem;
   line-height: 1.75;
 }
@@ -84,7 +85,7 @@
 .foto-duo img {
   display: block;
   width: 100%;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 2px;
   cursor: pointer;
   object-fit: cover;
@@ -133,12 +134,12 @@
   padding: 1rem 1.2rem;
   border: 1px solid rgba(139, 34, 82, 0.15);
   border-radius: 2px;
-  background: var(--paper-warm);
+  background: var(--bg-strong);
 }
 
 .kurs-time-card .day {
   margin-bottom: 0.2rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
@@ -146,12 +147,12 @@
 
 .kurs-time-card .time {
   margin-bottom: 0.3rem;
-  color: var(--ink);
+  color: var(--text);
   font-size: 0.85rem;
 }
 
 .kurs-time-card .detail {
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.76rem;
   line-height: 1.55;
 }
@@ -162,7 +163,7 @@
 
 .kalender-label {
   margin-bottom: 0.75rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-size: 0.6rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -178,12 +179,12 @@
   overflow: hidden;
   border: 1px solid rgba(139, 34, 82, 0.15);
   border-radius: 2px;
-  background: var(--paper-warm);
+  background: var(--bg-strong);
 }
 
 .kal-monat-head {
   padding: 0.4rem 0.6rem;
-  background: var(--crimson);
+  background: var(--brand);
   color: #fff;
   font-family: var(--font-display);
   font-size: 0.85rem;
@@ -195,14 +196,14 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 1px;
-  border-top: 1px solid var(--border);
-  background: var(--border);
+  border-top: 1px solid var(--line);
+  background: var(--line);
 }
 
 .kal-day-head {
   padding: 0.2rem 0;
   background: #f5f0eb;
-  color: var(--ink-f);
+  color: var(--text-faint);
   font-size: 0.48rem;
   letter-spacing: 0.04em;
   text-align: center;
@@ -216,7 +217,7 @@
   min-height: 1.4rem;
   padding: 0.28rem 0;
   background: #fff;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.65rem;
   text-align: center;
 }
@@ -226,17 +227,107 @@
   color: transparent;
 }
 
-.kal-day.termin {
-  background: var(--crimson);
+.kal-day.kal-c-kinder,
+.kal-day.kal-c-erwachsene,
+.kal-day.kal-c-special,
+.kal-day.kal-c-both {
   color: #fff;
   font-weight: 500;
+}
+
+.kal-c-kinder     { background: var(--cal-kinder); }
+.kal-c-erwachsene { background: var(--cal-erwachsene); }
+.kal-c-special    { background: var(--cal-special); }
+.kal-c-both       { background: linear-gradient(135deg, var(--cal-kinder) 50%, var(--cal-erwachsene) 50%); }
+
+/* vergangene Tage ausgegraut */
+.kal-day.kal-vergangen {
+  filter: grayscale(1);
+  opacity: 0.4;
+}
+
+.kal-day.kal-heute {
+  box-shadow: inset 0 0 0 2px var(--text);
+}
+
+.kal-kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.kal-kopf .kalender-label {
+  margin-bottom: 0;
+}
+
+.kal-nav {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.kal-nav button {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--line-brand);
+  border-radius: 2px;
+  background: var(--bg-strong);
+  color: var(--brand);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.kal-nav button:hover:not(:disabled) {
+  background: var(--brand);
+  color: #fff;
+}
+
+.kal-nav button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.kal-legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  margin-top: 0.8rem;
+  color: var(--text-soft);
+  font-size: 0.72rem;
+}
+
+.kal-legende span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.kal-swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 2px;
+  font-size: 0.55rem;
+  font-style: normal;
+}
+
+.kal-notes {
+  margin-top: 0.8rem;
+  padding-left: 1.1rem;
+  color: var(--text-soft);
+  font-size: 0.78rem;
+  line-height: 1.7;
 }
 
 .kurs-note {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid var(--border);
-  color: var(--ink-f);
+  border-top: 1px solid var(--line);
+  color: var(--text-faint);
   font-size: 0.77rem;
   font-style: italic;
   line-height: 1.7;
@@ -245,8 +336,8 @@
 .preis-heading {
   margin: 1.75rem 0 1rem;
   padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--border-crimson);
-  color: var(--crimson);
+  border-bottom: 1px solid var(--line-brand);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-style: italic;
@@ -261,20 +352,20 @@
 
 .preis-item {
   padding: 0.85rem 1rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 2px;
   background: #fff;
 }
 
 .preis-item .preis-label {
   margin-bottom: 0.25rem;
-  color: var(--ink-f);
+  color: var(--text-faint);
   font-size: 0.68rem;
   letter-spacing: 0.05em;
 }
 
 .preis-item .preis-wert {
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: 1.3rem;
   font-weight: 600;
@@ -283,7 +374,7 @@
 
 .preis-item .preis-detail {
   margin-top: 0.3rem;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.71rem;
   line-height: 1.5;
 }
@@ -298,7 +389,7 @@
 .einzeln-table th {
   padding: 0.4rem 0.75rem;
   border-bottom: 1px solid rgba(139, 34, 82, 0.25);
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: 0.85rem;
   font-style: italic;
@@ -309,7 +400,7 @@
 .einzeln-table td {
   padding: 0.38rem 0.75rem;
   border-bottom: 1px solid rgba(26, 23, 20, 0.05);
-  color: var(--ink-s);
+  color: var(--text-soft);
 }
 
 .einzeln-table tr:last-child td {
@@ -317,12 +408,12 @@
 }
 
 .einzeln-table td:last-child {
-  color: var(--ink);
+  color: var(--text);
 }
 
 .course-small-note {
   margin-top: 0.5rem;
-  color: var(--ink-f);
+  color: var(--text-faint);
   font-size: 0.76rem;
 }
 
@@ -334,14 +425,14 @@
   flex-wrap: wrap;
   margin-top: 2rem;
   padding: 1.4rem 1.6rem;
-  border: 1px solid var(--border-crimson);
+  border: 1px solid var(--line-brand);
   border-radius: 2px;
-  background: var(--paper-warm);
+  background: var(--bg-strong);
 }
 
 .kurs-cta h3 {
   margin-bottom: 0.3rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-style: italic;
@@ -350,20 +441,142 @@
 
 .kurs-cta p {
   margin: 0;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.8rem;
   line-height: 1.65;
 }
 
 .kurs-cta a:not(.cta-btn) {
-  color: var(--crimson);
+  color: var(--brand);
 }
 
 .kurs-loading {
   padding: 3rem;
-  color: var(--ink-f);
+  color: var(--text-faint);
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-style: italic;
   text-align: center;
+}
+
+/* ── Gutschein / Spezialangebot ── */
+.angebot {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--line-brand);
+  border-radius: 2px;
+  background: var(--bg-strong);
+}
+
+.angebot-icon {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  color: var(--brand);
+}
+
+.angebot-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.angebot-titel {
+  margin-bottom: 0.15rem;
+  color: var(--brand);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+}
+
+.panel-body .angebot-text {
+  max-width: none;
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+/* ── Slideshow: Werke aus den Kursen (direkt ueber dem Kalender) ── */
+/* Nur Bild + zwei feste Pfeile: kein Rahmen, keine weissen Flaechen, keine Beschriftung. */
+.slideshow {
+  margin: 0 0 1.75rem; /* die Ueberschrift (.preis-heading) bringt den oberen Abstand mit */
+}
+
+.slideshow-stage {
+  position: relative;
+  height: clamp(260px, 52vw, 440px);
+}
+
+.slide {
+  position: absolute;
+  inset: 0 4rem; /* Platz fuer die Pfeile links und rechts */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slide img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%; /* Werke werden nie angeschnitten, das Seitenverhaeltnis bleibt */
+  border-radius: 2px;
+  cursor: zoom-in;
+}
+
+.slide-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  padding: 0 0 0.25rem;
+  transform: translateY(-50%);
+  border: none;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.slide-nav:hover,
+.slide-nav:focus-visible {
+  background: var(--brand-dark);
+}
+
+.slide-prev { left: 0; }
+.slide-next { right: 0; }
+
+@media (max-width: 700px) {
+  .slide { inset: 0 3rem; }
+
+  .slide-nav {
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide { transition: none; }
 }

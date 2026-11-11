@@ -143,7 +143,7 @@ function renderStylesOverview() {
     const count = galleryData.works.filter(w => w.styleId === style.id).length;
     return `<div class="style-card-admin">
       <div class="thumb-wrap" onclick="openStyle('${style.id}')">
-        <img src="${escHtml(style.thumbnail)}" alt="${escHtml(style.name)}" loading="lazy">
+        <img src="${escHtml(style.thumbnail)}" alt="${escHtml(style.name)}" loading="lazy" style="object-position:${escAttr(style.thumbnailPosition || '50% 50%')}">
       </div>
       <div class="card-body">
         <div class="card-name">${escHtml(style.name)}</div>
@@ -195,7 +195,7 @@ function renderWorksList() {
     return `<div class="work-row">
     <img src="${escHtml(images[0] || '')}" alt="${escHtml(w.title)}" loading="lazy">
     <div class="work-info">
-      <div class="work-title">${escHtml(w.title)}${w.sold ? ' <span style="color:var(--red);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em">· Verkauft</span>' : ''}${w.highlight ? ' <span style="color:var(--gold);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em">· Highlight</span>' : ''}${images.length > 1 ? ` <span style="color:var(--ink-f);font-size:0.7rem">(${images.length} Bilder)</span>` : ''}</div>
+      <div class="work-title">${escHtml(w.title)}${w.sold ? ' <span style="color:var(--red);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em">· Verkauft</span>' : ''}${images.length > 1 ? ` <span style="color:var(--ink-f);font-size:0.7rem">(${images.length} Bilder)</span>` : ''}</div>
       <div class="work-meta">${escHtml(w.technique || '')}</div>
     </div>
     <div class="work-actions">
@@ -236,7 +236,6 @@ function openEditWork(workId) {
   document.getElementById('w-price').value     = work.price || '';
   document.getElementById('w-desc').value      = work.description || '';
   document.getElementById('w-sold').checked    = !!work.sold;
-  document.getElementById('w-highlight').checked = !!work.highlight;
 
   renderWorkImagesGrid();
   document.getElementById('modal-work').style.display = 'flex';
@@ -270,7 +269,6 @@ function resetWorkForm() {
   document.getElementById('w-desc').value      = '';
   document.getElementById('w-ai-context').value = '';
   document.getElementById('w-sold').checked    = false;
-  document.getElementById('w-highlight').checked = false;
   document.getElementById('w-ai-status').textContent = '';
   document.getElementById('w-ai-status').classList.remove('is-error');
 
@@ -403,7 +401,6 @@ async function saveWork() {
   const price     = document.getElementById('w-price').value.trim();
   const desc      = document.getElementById('w-desc').value.trim();
   const sold      = document.getElementById('w-sold').checked;
-  const highlight = document.getElementById('w-highlight').checked;
 
   if (!title) { showError('modal-error', 'Bitte einen Titel eingeben.'); return; }
 
@@ -416,13 +413,13 @@ async function saveWork() {
     // Werk aktualisieren
     const idx = galleryData.works.findIndex(w => w.id === editingWorkId);
     if (idx !== -1) {
-      galleryData.works[idx] = { ...galleryData.works[idx], styleId, title, technique, price, description: desc, images: [...workImages], sold, highlight };
+      galleryData.works[idx] = { ...galleryData.works[idx], styleId, title, technique, price, description: desc, images: [...workImages], sold };
     }
   } else {
     // Neues Werk anlegen
     const newWork = {
       id: 'w' + Date.now(),
-      styleId, title, technique, price, description: desc, images: [...workImages], sold, highlight
+      styleId, title, technique, price, description: desc, images: [...workImages], sold
     };
     galleryData.works.push(newWork);
   }
@@ -540,20 +537,27 @@ async function handleStyleFileSelect(input) {
 
 /* ── Fokuspunkt-Picker (Bildausschnitt Stil-Vorschaubild) ── */
 function focusPercentFromClick(imgEl, clientX, clientY) {
+  // Der Klick legt die MITTE des quadratischen Ausschnitts fest; zurueck kommt die passende
+  // CSS-object-position. Entlang der kurzen Bildseite gibt es nichts zu verschieben (50%).
   const rect = imgEl.getBoundingClientRect();
   if (!rect.width || !rect.height) return null;
-  const xPct = Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100));
-  const yPct = Math.min(100, Math.max(0, ((clientY - rect.top) / rect.height) * 100));
-  return xPct.toFixed(1) + '% ' + yPct.toFixed(1) + '%';
+  const side = Math.min(rect.width, rect.height);
+  const pct = (pos, size) => size > side ? Math.min(100, Math.max(0, (pos - side / 2) / (size - side) * 100)) : 50;
+  return pct(clientX - rect.left, rect.width).toFixed(1) + '% ' + pct(clientY - rect.top, rect.height).toFixed(1) + '%';
 }
 
+// Zeichnet den quadratischen Ausschnitt (so wie er auf der Website sichtbar ist) als Rahmen ins Bild.
 function placeFocusMarker(markerEl, positionStr) {
   if (!markerEl) return;
-  if (!positionStr) { markerEl.style.display = 'none'; return; }
-  const parts = positionStr.split(' ').map(v => parseFloat(v));
-  if (parts.length !== 2 || parts.some(isNaN)) { markerEl.style.display = 'none'; return; }
-  markerEl.style.left = parts[0] + '%';
-  markerEl.style.top  = parts[1] + '%';
+  const img = markerEl.parentElement.querySelector('img');
+  const dw = img?.clientWidth, dh = img?.clientHeight;
+  const parts = (positionStr || '').split(' ').map(v => parseFloat(v));
+  if (!dw || !dh || parts.length !== 2 || parts.some(isNaN)) { markerEl.style.display = 'none'; return; }
+  const side = Math.min(dw, dh);
+  markerEl.style.width  = side + 'px';
+  markerEl.style.height = side + 'px';
+  markerEl.style.left   = (dw > dh ? (dw - side) * parts[0] / 100 : 0) + 'px';
+  markerEl.style.top    = (dh > dw ? (dh - side) * parts[1] / 100 : 0) + 'px';
   markerEl.style.display = 'block';
 }
 
@@ -694,10 +698,12 @@ const TAG_NAMEN_ADMIN   = ['Mo','Di','Mi','Do','Fr','Sa','So'];
 /* ── Section-Switcher ── */
 function showSection(name, btn) {
   document.getElementById('section-galerie').style.display       = name === 'galerie'       ? 'block' : 'none';
+  document.getElementById('section-startseite').style.display    = name === 'startseite'    ? 'block' : 'none';
   document.getElementById('section-kurse').style.display         = name === 'kurse'         ? 'block' : 'none';
   document.getElementById('section-einstellungen').style.display = name === 'einstellungen' ? 'block' : 'none';
   document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  if (name === 'startseite') loadHome();
   if (name === 'kurse' && !coursesData) loadCourses();
   if (name === 'einstellungen' && !settingsData) loadSettings();
 }
@@ -762,10 +768,13 @@ function fillCourseForms() {
   setVal('k-title',   k.title);
   setVal('k-desc',    k.description);
   setVal('k-hint',    k.hinweis);
-  setVal('k-jahr',    k.termine.jahr);
-  setVal('k-einzeln-note', k.einzelstunden_note);
-  renderZeiten(k.zeiten);
-  renderKalender(k.termine);
+  ensureAngebot(k);
+  renderAngebotAdmin();
+  ensureSlideshow(k);
+  renderSlideshowAdmin();
+  ensureKalender(k);
+  renderKursBoxen();
+  renderKalSummary();
   renderPreisListAdmin('preise-list', k.preise);
   renderEinzelnList(k.einzelstunden);
 
@@ -791,87 +800,264 @@ function setVal(id, val) {
   if (el) el.value = val ?? '';
 }
 
-/* ── Zeiten ── */
-function renderZeiten(zeiten) {
-  document.getElementById('zeiten-list').innerHTML = zeiten.map((z, i) => `
-    <div class="ca-list-item" data-idx="${i}">
-      <div class="ca-fields">
-        <input type="text" placeholder="Tag (z.B. Montags)"  value="${escAttr(z.tag)}"    oninput="updateZeit(${i},'tag',this.value)">
-        <input type="text" placeholder="Zeit"                 value="${escAttr(z.zeit)}"   oninput="updateZeit(${i},'zeit',this.value)">
-        <input type="text" placeholder="Details"              value="${escAttr(z.detail)}" oninput="updateZeit(${i},'detail',this.value)" style="flex-basis:100%">
-      </div>
-      <button class="remove-btn" onclick="removeZeit(${i})">×</button>
+/* ── Kurs-Boxen (Aufbau wie auf der Kursseite) ── */
+// Pro Kursart: Wochentag, Zeit und Details (die Box auf der Kursseite) plus Laufzeit.
+// Der Wochentag steuert zugleich den Kalender (assets/js/calendar.js).
+const WOCHENTAGE = [[1, 'Montags'], [2, 'Dienstags'], [3, 'Mittwochs'], [4, 'Donnerstags'], [5, 'Freitags'], [6, 'Samstags'], [0, 'Sonntags']];
+const KAL_KURSE  = [
+  { id: 'erwachsene', label: 'Erwachsenenkurs', weekday: 1, zeit: '', detail: '', from: '', to: '' },
+  { id: 'kinder',     label: 'Kinderkurs',      weekday: 4, zeit: '', detail: '', from: '', to: '' },
+];
+
+function ensureKalender(k) {
+  const kal = k.kalender || {};
+  const alt = k.zeiten || []; // frühere Datenform: Zeiten getrennt vom Kalender
+  k.kalender = {
+    kurse: KAL_KURSE.map(d => {
+      const old = (kal.kurse || []).find(x => x.id === d.id) || {};
+      const z   = alt.find(z => (z.detail || '').startsWith(d.id === 'kinder' ? 'Kinder' : 'Erwachsene')) || {};
+      return { ...d, zeit: z.zeit || '', detail: z.detail || '', ...old };
+    }),
+    ausfaelle: kal.ausfaelle || [],
+    specials: kal.specials || [],
+  };
+  delete k.termine;
+  delete k.zeiten;
+}
+
+function updateKal(list, i, key, val) { coursesData.kurse.kalender[list][i][key] = val; }
+
+function renderKursBoxen() {
+  document.getElementById('kurs-boxen').innerHTML = coursesData.kurse.kalender.kurse.map((k, i) => `
+    <div class="mirror-box">
+      <div class="mirror-box-kopf"><i class="kal-dot kal-dot--${k.id}"></i>${escHtml(k.label)} <small>(Farbe im Kalender)</small></div>
+      <select class="mirror-day" onchange="updateKal('kurse',${i},'weekday',+this.value)">
+        ${WOCHENTAGE.map(([v, n]) => `<option value="${v}"${v === +k.weekday ? ' selected' : ''}>${n}</option>`).join('')}
+      </select>
+      <input class="mirror-time" type="text" value="${escAttr(k.zeit)}" placeholder="Uhrzeit, z.B. 18:00 – 19:30 Uhr" oninput="updateKal('kurse',${i},'zeit',this.value)">
+      <textarea class="mirror-detail" rows="2" placeholder="Details" oninput="updateKal('kurse',${i},'detail',this.value)">${escHtml(k.detail)}</textarea>
     </div>`).join('');
 }
 
-function updateZeit(i, key, val) { coursesData.kurse.zeiten[i][key] = val; }
-function removeZeit(i) { coursesData.kurse.zeiten.splice(i,1); renderZeiten(coursesData.kurse.zeiten); }
-function addZeit() {
-  coursesData.kurse.zeiten.push({ tag:'', zeit:'', detail:'' });
-  renderZeiten(coursesData.kurse.zeiten);
+function renderKalSummary() {
+  const kal = coursesData.kurse.kalender;
+  const n = (c, one, many) => `${c} ${c === 1 ? one : many}`;
+  document.getElementById('kal-summary').textContent =
+    `${n(kal.ausfaelle.length, 'Ausfall', 'Ausfälle')} · ${n(kal.specials.length, 'besonderer Termin', 'besondere Termine')}`;
 }
 
-/* ── Kalender ── */
-function renderKalender(termine) {
-  const wrap = document.getElementById('admin-kalender');
-  wrap.innerHTML = '';
-  termine.monate.forEach((mon, mIdx) => {
-    const { monat: m, tage } = mon;
-    const erster  = new Date(termine.jahr, m, 1);
-    let startWt   = erster.getDay(); startWt = startWt===0?6:startWt-1;
-    const dimMonth = new Date(termine.jahr, m+1, 0).getDate();
+/* ── Kalender-Pop-up: Laufzeit, Ausfälle, Besondere Termine ── */
+let kalSnapshot = null;
 
-    let html = `<div class="admin-kal-monat">
-      <div class="admin-kal-head">
-        <span>${MONAT_NAMEN_ADMIN[m]}</span>
-        <button onclick="removeMonat(${mIdx})" title="Monat entfernen">✕</button>
-      </div>
-      <div class="admin-kal-days">`;
-    TAG_NAMEN_ADMIN.forEach(t => { html += `<div class="admin-kal-dayhead">${t}</div>`; });
-    for (let i=0; i<startWt; i++) html += `<div class="admin-kal-day leer">0</div>`;
-    for (let d=1; d<=dimMonth; d++) {
-      const isT = tage.includes(d);
-      html += `<div class="admin-kal-day${isT?' termin':''}" onclick="toggleTag(${mIdx},${d})">${d}</div>`;
-    }
-    html += '</div></div>';
-    wrap.innerHTML += html;
-  });
+function openKalenderModal() {
+  kalSnapshot = JSON.stringify(coursesData.kurse.kalender); // für „Abbrechen“
+  hideError('modal-kal-error');
+  renderKalenderModal();
+  document.getElementById('modal-kal').style.display = 'flex';
 }
 
-function toggleTag(mIdx, day) {
-  const mon = coursesData.kurse.termine.monate[mIdx];
-  const i   = mon.tage.indexOf(day);
-  if (i === -1) mon.tage.push(day);
-  else mon.tage.splice(i, 1);
-  mon.tage.sort((a,b)=>a-b);
-  renderKalender(coursesData.kurse.termine);
+function cancelKalenderModal() {
+  if (kalSnapshot) coursesData.kurse.kalender = JSON.parse(kalSnapshot);
+  kalSnapshot = null;
+  renderKursBoxen();
+  renderKalSummary();
+  closeModal('modal-kal');
 }
 
-function removeMonat(mIdx) {
-  if (!confirm('Monat wirklich entfernen?')) return;
-  coursesData.kurse.termine.monate.splice(mIdx, 1);
-  renderKalender(coursesData.kurse.termine);
+async function saveKalenderModal() {
+  hideError('modal-kal-error');
+  if (await saveCourses('modal-kal-error')) {
+    kalSnapshot = null;
+    closeModal('modal-kal');
+  }
 }
 
-function addMonat() {
-  const m = coursesData.kurse.termine.monate;
-  const letzter = m.length ? m[m.length-1].monat : -1;
-  const naechster = (letzter + 1) % 12;
-  m.push({ monat: naechster, tage: [] });
-  renderKalender(coursesData.kurse.termine);
-}
+function renderKalenderModal() {
+  const kal = coursesData.kurse.kalender;
 
-/* ── Preise ── */
-function renderPreisListAdmin(listId, preise) {
-  document.getElementById(listId).innerHTML = preise.map((p, i) => `
+  document.getElementById('kal-laufzeit').innerHTML = kal.kurse.map((k, i) => `
     <div class="ca-list-item">
       <div class="ca-fields">
-        <input type="text" placeholder="Bezeichnung" value="${escAttr(p.label)}"  oninput="updatePreis('${listId}',${i},'label',this.value)" style="flex-basis:100%">
-        <input type="text" placeholder="Preis"        value="${escAttr(p.wert)}"   oninput="updatePreis('${listId}',${i},'wert',this.value)">
-        <input type="text" placeholder="Details"      value="${escAttr(p.detail)}" oninput="updatePreis('${listId}',${i},'detail',this.value)">
+        <strong class="kal-kursname"><i class="kal-dot kal-dot--${k.id}"></i>${escHtml(k.label)}</strong>
+        <label class="mini-field">Läuft ab (leer = schon laufend)
+          <input type="date" value="${escAttr(k.from)}" onchange="updateKal('kurse',${i},'from',this.value)"></label>
+        <label class="mini-field">Läuft bis (leer = unbefristet)
+          <input type="date" value="${escAttr(k.to)}" onchange="updateKal('kurse',${i},'to',this.value)"></label>
       </div>
-      <button class="remove-btn" onclick="removePreis('${listId}',${i})">×</button>
     </div>`).join('');
+
+  document.getElementById('kal-ausfaelle').innerHTML = kal.ausfaelle.length ? kal.ausfaelle.map((a, i) => `
+    <div class="ca-list-item">
+      <div class="ca-fields">
+        <label class="mini-field">Datum (oder von)
+          <input type="date" value="${escAttr(a.from)}" onchange="updateKal('ausfaelle',${i},'from',this.value)"></label>
+        <label class="mini-field">bis (optional, für Zeiträume)
+          <input type="date" value="${escAttr(a.to)}" onchange="updateKal('ausfaelle',${i},'to',this.value)"></label>
+        <label class="mini-field">Welcher Kurs?
+          <select onchange="updateKal('ausfaelle',${i},'kurse',this.value)">
+            <option value="beide"${a.kurse === 'beide' ? ' selected' : ''}>Beide Kurse</option>
+            <option value="kinder"${a.kurse === 'kinder' ? ' selected' : ''}>Nur Kinderkurs</option>
+            <option value="erwachsene"${a.kurse === 'erwachsene' ? ' selected' : ''}>Nur Erwachsenenkurs</option>
+          </select></label>
+        <label class="mini-field" style="flex-basis:100%">Grund (optional, steht unter dem Kalender)
+          <input type="text" value="${escAttr(a.grund)}" placeholder="z.B. Krankheit, Betriebsferien" oninput="updateKal('ausfaelle',${i},'grund',this.value)"></label>
+      </div>
+      <button class="remove-btn" onclick="removeKal('ausfaelle',${i})">×</button>
+    </div>`).join('') : '<p class="section-hint" style="margin:0 0 .6rem">Keine Ausfälle eingetragen.</p>';
+
+  document.getElementById('kal-specials').innerHTML = kal.specials.length ? kal.specials.map((s, i) => `
+    <div class="ca-list-item">
+      <div class="ca-fields">
+        <label class="mini-field">Datum
+          <input type="date" value="${escAttr(s.date)}" onchange="updateKal('specials',${i},'date',this.value)"></label>
+        <label class="mini-field">Farbe im Kalender
+          <select onchange="updateKal('specials',${i},'color',this.value)">
+            <option value="kinder"${s.color === 'kinder' ? ' selected' : ''}>Wie Kinderkurs</option>
+            <option value="erwachsene"${s.color === 'erwachsene' ? ' selected' : ''}>Wie Erwachsenenkurs</option>
+            <option value="special"${!s.color || s.color === 'special' ? ' selected' : ''}>Eigene Farbe (Bernstein)</option>
+          </select></label>
+        <label class="mini-field" style="flex-basis:100%">Titel
+          <input type="text" value="${escAttr(s.title)}" placeholder="z.B. Weihnachtsmalen" oninput="updateKal('specials',${i},'title',this.value)"></label>
+        <label class="mini-field" style="flex-basis:100%">Uhrzeit / Hinweis (optional)
+          <input type="text" value="${escAttr(s.time)}" placeholder="z.B. 14:00 – 17:00 Uhr" oninput="updateKal('specials',${i},'time',this.value)"></label>
+      </div>
+      <button class="remove-btn" onclick="removeKal('specials',${i})">×</button>
+    </div>`).join('') : '<p class="section-hint" style="margin:0 0 .6rem">Keine besonderen Termine eingetragen.</p>';
+}
+
+function addAusfall() {
+  coursesData.kurse.kalender.ausfaelle.push({ from: '', to: '', kurse: 'beide', grund: '' });
+  renderKalenderModal();
+}
+
+function addSpecial() {
+  coursesData.kurse.kalender.specials.push({ id: 's' + Date.now(), date: '', title: '', time: '', color: 'special' });
+  renderKalenderModal();
+}
+
+function removeKal(list, i) {
+  coursesData.kurse.kalender[list].splice(i, 1);
+  renderKalenderModal();
+}
+
+// Fehlertext oder '' - sortiert nebenbei die Listen nach Datum
+function validateKalender() {
+  const kal = coursesData.kurse.kalender;
+  if (kal.kurse.some(c => c.from && c.to && c.to < c.from)) return 'Beim Kurs liegt „Läuft bis“ vor „Läuft ab“.';
+  if (kal.ausfaelle.some(a => !a.from)) return 'Bitte bei jedem Ausfall ein Datum angeben (oder den Eintrag mit × entfernen).';
+  if (kal.ausfaelle.some(a => a.to && a.to < a.from)) return 'Bei einem Ausfall liegt „bis“ vor dem Anfangsdatum.';
+  if (kal.specials.some(s => !s.date || !s.title.trim())) return 'Bitte bei jedem besonderen Termin Datum und Titel angeben (oder den Eintrag mit × entfernen).';
+  kal.ausfaelle.sort((a, b) => a.from.localeCompare(b.from));
+  kal.specials.sort((a, b) => a.date.localeCompare(b.date));
+  return '';
+}
+
+/* ── Slideshow: Werke aus den Kursen (Anfang der Kursseite) ── */
+function ensureSlideshow(k) {
+  k.slideshow = Array.isArray(k.slideshow) ? k.slideshow : [];
+}
+
+function renderSlideshowAdmin() {
+  const list = coursesData.kurse.slideshow;
+  document.getElementById('slideshow-list').innerHTML = list.map((s, i) => `
+    <div class="slide-tile">
+      <img src="${escAttr(s.image)}" alt="">
+      <div class="slide-tile-btns">
+        <button type="button" onclick="moveSlide(${i},-1)" ${i === 0 ? 'disabled' : ''} title="Nach vorn">←</button>
+        <button type="button" onclick="moveSlide(${i},1)" ${i === list.length - 1 ? 'disabled' : ''} title="Nach hinten">→</button>
+        <button type="button" onclick="removeSlide(${i})" title="Entfernen">×</button>
+      </div>
+    </div>`).join('') +
+    `<button type="button" class="mirror-add slide-add" onclick="document.getElementById('slide-file').click()">+ Bilder hinzufügen</button>`;
+}
+
+function moveSlide(i, delta) {
+  const list = coursesData.kurse.slideshow;
+  [list[i], list[i + delta]] = [list[i + delta], list[i]];
+  renderSlideshowAdmin();
+}
+
+function removeSlide(i) {
+  coursesData.kurse.slideshow.splice(i, 1);
+  renderSlideshowAdmin();
+}
+
+async function addSlides(input) {
+  const files = Array.from(input.files || []).filter(f => f.type.startsWith('image/'));
+  input.value = '';
+  if (!files.length) return;
+  const status = document.getElementById('slideshow-status');
+  let failed = 0;
+  for (const [n, file] of files.entries()) {
+    status.textContent = `Bild ${n + 1} von ${files.length} wird hochgeladen…`;
+    try {
+      coursesData.kurse.slideshow.push({ image: await uploadImage(file) });
+      renderSlideshowAdmin();
+    } catch (e) { failed++; }
+  }
+  status.textContent = (failed ? `${failed} Bild(er) konnten nicht hochgeladen werden. ` : '')
+    + 'Zum Übernehmen auf die Website unten auf „Änderungen speichern“ klicken.';
+}
+
+/* ── Gutschein / Spezialangebot (Kursseite, unter der Privatstunden-Tabelle) ── */
+function ensureAngebot(k) {
+  // frühere Datenform: einfache Fußzeile "Titel: Text" in einzelstunden_note
+  const note = (k.einzelstunden_note || '').trim();
+  const m = note.match(/^([^:]{1,40}):\s*([\s\S]+)$/);
+  k.angebot = { titel: m ? m[1].trim() : '', text: m ? m[2].trim() : note, icon: 'geschenk', from: '', to: '', ...(k.angebot || {}) };
+  delete k.einzelstunden_note;
+}
+
+function angebotStatus(a) {
+  const today = todayStr();
+  if (!(a.text || '').trim()) return ['ohne Text – wird nicht angezeigt', 'is-expired'];
+  if (a.to && a.to < today)     return ['abgelaufen', 'is-expired'];
+  if (a.from && a.from > today) return ['geplant', 'is-planned'];
+  return ['aktiv', 'is-active'];
+}
+
+function renderAngebotAdmin() {
+  const a = coursesData.kurse.angebot;
+  const [label, cls] = angebotStatus(a);
+  document.getElementById('angebot-box').innerHTML = `
+    <div class="mirror-box">
+      <div class="angebot-icons">
+        <button type="button" class="icon-opt${!a.icon ? ' selected' : ''}" onclick="updateAngebot('icon','')" title="Kein Symbol">–</button>
+        ${Object.entries(Angebot.ICONS).map(([key, ic]) =>
+          `<button type="button" class="icon-opt${a.icon === key ? ' selected' : ''}" onclick="updateAngebot('icon','${key}')" title="${ic.label}">${ic.svg}</button>`
+        ).join('')}
+      </div>
+      <input class="mirror-day" type="text" placeholder="Überschrift, z.B. Weihnachtsspecial" value="${escAttr(a.titel)}" oninput="updateAngebot('titel',this.value,true)">
+      <textarea class="mirror-detail" rows="2" placeholder="Kleiner Text, z.B. Gutscheine für Malkurse im Atelier erhältlich" oninput="updateAngebot('text',this.value,true)">${escHtml(a.text)}</textarea>
+      <div class="angebot-dates">
+        <label class="mini-field">Von (leer = sofort sichtbar)
+          <input type="date" value="${escAttr(a.from)}" onchange="updateAngebot('from',this.value)"></label>
+        <label class="mini-field">Bis (leer = unbefristet)
+          <input type="date" value="${escAttr(a.to)}" onchange="updateAngebot('to',this.value)"></label>
+        <span id="angebot-status" class="badge ${cls}">${label}</span>
+      </div>
+    </div>`;
+}
+
+// keepFocus: beim Tippen nur die Status-Anzeige aktualisieren (sonst springt der Cursor)
+function updateAngebot(key, val, keepFocus) {
+  coursesData.kurse.angebot[key] = val;
+  if (!keepFocus) return renderAngebotAdmin();
+  const [label, cls] = angebotStatus(coursesData.kurse.angebot);
+  const badge = document.getElementById('angebot-status');
+  badge.textContent = label;
+  badge.className = 'badge ' + cls;
+}
+
+/* ── Preise (Boxen wie auf der Kursseite) ── */
+function renderPreisListAdmin(listId, preise) {
+  document.getElementById(listId).innerHTML = preise.map((p, i) => `
+    <div class="mirror-price">
+      <button class="mirror-x" onclick="removePreis('${listId}',${i})" title="Box entfernen">×</button>
+      <input class="mp-label"  type="text" placeholder="Bezeichnung" value="${escAttr(p.label)}"  oninput="updatePreis('${listId}',${i},'label',this.value)">
+      <input class="mp-wert"   type="text" placeholder="Preis"       value="${escAttr(p.wert)}"   oninput="updatePreis('${listId}',${i},'wert',this.value)">
+      <input class="mp-detail" type="text" placeholder="Details"     value="${escAttr(p.detail)}" oninput="updatePreis('${listId}',${i},'detail',this.value)">
+    </div>`).join('') + `<button class="mirror-add" onclick="addPreis('${listId}')">+ Preis-Box hinzufügen</button>`;
 }
 
 function getPreisArray(listId) {
@@ -886,20 +1072,24 @@ function removePreis(listId, i) {
   renderPreisListAdmin(listId, getPreisArray(listId));
 }
 function addPreis(listId) {
-  getPreisArray(listId).push({ label:'', wert:'', detail:'' });
+  getPreisArray(listId).push({ label: '', wert: '', detail: '' });
   renderPreisListAdmin(listId, getPreisArray(listId));
 }
 
-/* ── Einzelstunden ── */
+/* ── Privatstunden-Tabelle ── */
 function renderEinzelnList(rows) {
-  document.getElementById('einzeln-list').innerHTML = rows.map((r, i) => `
-    <div class="ca-list-item">
-      <div class="ca-fields">
-        <input type="text" placeholder="Personen" value="${escAttr(r.personen)}" oninput="updateEinzeln(${i},'personen',this.value)">
-        <input type="text" placeholder="Preis"    value="${escAttr(r.preis)}"    oninput="updateEinzeln(${i},'preis',this.value)">
-      </div>
-      <button class="remove-btn" onclick="removeEinzeln(${i})">×</button>
-    </div>`).join('');
+  document.getElementById('einzeln-list').innerHTML = `
+    <table class="mirror-table">
+      <thead><tr><th>Privatstunden – Personen</th><th>Preis je Person</th><th></th></tr></thead>
+      <tbody>${rows.map((r, i) => `
+        <tr>
+          <td><input type="text" value="${escAttr(r.personen)}" oninput="updateEinzeln(${i},'personen',this.value)"></td>
+          <td><input type="text" value="${escAttr(r.preis)}"    oninput="updateEinzeln(${i},'preis',this.value)"></td>
+          <td><button class="mirror-x mirror-x--row" onclick="removeEinzeln(${i})" title="Zeile entfernen">×</button></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+    <button class="mirror-add mirror-add--row" onclick="addEinzeln()">+ Zeile hinzufügen</button>`;
 }
 
 function updateEinzeln(i, key, val) { coursesData.kurse.einzelstunden[i][key] = val; }
@@ -907,10 +1097,19 @@ function removeEinzeln(i) {
   coursesData.kurse.einzelstunden.splice(i, 1);
   renderEinzelnList(coursesData.kurse.einzelstunden);
 }
+function addEinzeln() {
+  coursesData.kurse.einzelstunden.push({ personen: '', preis: '' });
+  renderEinzelnList(coursesData.kurse.einzelstunden);
+}
 
 /* ── Speichern ── */
-async function saveCourses() {
-  hideError('courses-error');
+// errId: wo Fehler erscheinen (Seite oder Kalender-Pop-up). Gibt true zurück, wenn gespeichert wurde.
+async function saveCourses(errId = 'courses-error') {
+  hideError(errId);
+  const kalError = validateKalender();
+  if (kalError) { showError(errId, kalError); return false; }
+  const ang = coursesData.kurse.angebot;
+  if (ang.from && ang.to && ang.to < ang.from) { showError(errId, 'Beim Gutschein/Spezialangebot liegt „Bis“ vor „Von“.'); return false; }
 
   // Felder auslesen
   const k = coursesData.kurse;
@@ -918,8 +1117,6 @@ async function saveCourses() {
   k.title       = document.getElementById('k-title').value;
   k.description = document.getElementById('k-desc').value;
   k.hinweis     = document.getElementById('k-hint').value;
-  k.termine.jahr          = parseInt(document.getElementById('k-jahr').value) || 2026;
-  k.einzelstunden_note    = document.getElementById('k-einzeln-note').value;
 
   const g = coursesData.geburtstag;
   g.eyebrow     = document.getElementById('g-eyebrow').value;
@@ -943,13 +1140,300 @@ async function saveCourses() {
       body: JSON.stringify(coursesData)
     });
     const data = await res.json();
-    if (data.ok) showToast('Kursangebote gespeichert');
-    else showError('courses-error', data.error || 'Speichern fehlgeschlagen');
-  } catch(e) {
-    showError('courses-error', 'Verbindungsfehler');
+    if (data.ok) {
+      showToast('Kursangebote gespeichert');
+      renderKalSummary();
+      return true;
+    }
+    showError(errId, data.error || 'Speichern fehlgeschlagen');
+  } catch (e) {
+    showError(errId, 'Verbindungsfehler');
   }
+  return false;
 }
 
 function escAttr(s) {
   return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   STARTSEITE — Admin: "Aktuelles" und Highlights (api/home.php, data/home.json)
+   ═══════════════════════════════════════════════════════════════════════ */
+const MAX_HIGHLIGHTS = 4; // gleicher Wert wie HOME_MAX_HIGHLIGHTS in partials/home-data.php
+let homeData      = null; // { highlights: [workId, …], news: [{id,title,text,image,from,to}, …] }
+let editingNewsId = null;
+let newsImage     = '';
+
+const todayStr = () => new Date().toLocaleDateString('sv-SE'); // YYYY-MM-DD in lokaler Zeit
+const fmtDate  = d => d.split('-').reverse().join('.');
+
+async function loadHome() {
+  const res  = await fetch('/api/home.php').catch(() => null);
+  const data = res?.ok ? await res.json().catch(() => ({})) : {};
+  const ids  = Array.isArray(data.highlights) ? data.highlights : [];
+  homeData = {
+    // Ids geloeschter Werke aussortieren, damit Reihenfolge-Buttons immer zur Liste passen
+    highlights: ids.filter(id => galleryData.works.some(w => w.id === id)),
+    news: Array.isArray(data.news) ? data.news : [],
+    focus: data.focus && typeof data.focus === 'object' && !Array.isArray(data.focus) ? data.focus : {}, // Werk-ID -> Ausschnitt
+  };
+  document.getElementById('max-highlights').textContent = MAX_HIGHLIGHTS;
+  renderNews();
+  renderHighlights();
+}
+
+async function saveHome() {
+  const res = await fetch('/api/home.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrfToken },
+    body: JSON.stringify(homeData),
+  }).catch(() => null);
+  const data = await res?.json().catch(() => null);
+  if (!data?.ok) throw new Error(data?.error || 'Speichern fehlgeschlagen');
+}
+
+async function uploadImage(file) {
+  const formData = new FormData();
+  formData.append('image', file);
+  const res  = await fetch(API.upload, { method: 'POST', headers: { 'X-CSRF-Token': csrfToken }, body: formData }).catch(() => null);
+  const data = await res?.json().catch(() => null);
+  if (!data?.ok) throw new Error(data?.error || 'Bild konnte nicht hochgeladen werden.');
+  return data.url;
+}
+
+/* ── Aktuelles ── */
+function newsStatus(n) {
+  const today = todayStr();
+  if (n.to && n.to < today)     return ['abgelaufen', 'is-expired'];
+  if (n.from && n.from > today) return ['geplant', 'is-planned'];
+  return ['aktiv', 'is-active'];
+}
+
+function newsPeriodText(n) {
+  if (n.from && n.to) return n.from === n.to ? fmtDate(n.to) : `${fmtDate(n.from)} – ${fmtDate(n.to)}`;
+  if (n.from) return 'ab ' + fmtDate(n.from);
+  if (n.to)   return 'bis ' + fmtDate(n.to);
+  return 'unbefristet';
+}
+
+function renderNews() {
+  const list = document.getElementById('news-list');
+  if (!homeData.news.length) {
+    list.innerHTML = '<p style="color:var(--ink-f);padding:.5rem 0">Noch keine Einträge – auf der Startseite wird „Aktuelles“ deshalb nicht angezeigt.</p>';
+    return;
+  }
+  // Abgelaufene Eintraege nach unten (stabile Sortierung: sonst bleibt die Reihenfolge wie gespeichert)
+  const sorted = [...homeData.news].sort((a, b) => (newsStatus(a)[1] === 'is-expired') - (newsStatus(b)[1] === 'is-expired'));
+  list.innerHTML = sorted.map(n => {
+    const [label, cls] = newsStatus(n);
+    return `<div class="work-row${cls === 'is-expired' ? ' is-dimmed' : ''}">
+    <img src="${escHtml(n.image)}" alt="" loading="lazy">
+    <div class="work-info">
+      <div class="work-title">${escHtml(n.title)} <span class="badge ${cls}">${label}</span></div>
+      <div class="work-meta">${escHtml(newsPeriodText(n))}</div>
+    </div>
+    <div class="work-actions">
+      <button class="btn-secondary" onclick="openNewsModal('${escHtml(n.id)}')">Bearbeiten</button>
+      <button class="btn-danger"    onclick="deleteNews('${escHtml(n.id)}')">Löschen</button>
+    </div>
+  </div>`;
+  }).join('');
+}
+
+function setNewsImage(url) {
+  newsImage = url || '';
+  const img = document.getElementById('n-preview');
+  img.src = newsImage;
+  img.style.display = newsImage ? 'inline-block' : 'none';
+  document.getElementById('n-placeholder').style.display = newsImage ? 'none' : 'block';
+}
+
+function openNewsModal(id) {
+  editingNewsId = id || null;
+  const n = id ? homeData.news.find(x => x.id === id) : null;
+  document.getElementById('modal-news-title').textContent = n ? 'Aktuelles: Eintrag bearbeiten' : 'Aktuelles: Eintrag hinzufügen';
+  document.getElementById('n-title').value = n?.title || '';
+  document.getElementById('n-text').value  = n?.text  || '';
+  document.getElementById('n-from').value  = n?.from  || '';
+  document.getElementById('n-to').value    = n?.to    || '';
+  document.getElementById('n-file').value  = '';
+  setNewsImage(n?.image);
+  hideError('modal-news-error');
+  document.getElementById('modal-news').style.display = 'flex';
+}
+
+async function handleNewsFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  try {
+    setNewsImage(await uploadImage(file));
+    hideError('modal-news-error');
+  } catch (e) {
+    showError('modal-news-error', e.message);
+  }
+  input.value = '';
+}
+
+async function saveNews() {
+  hideError('modal-news-error');
+  const title = document.getElementById('n-title').value.trim();
+  const text  = document.getElementById('n-text').value.trim();
+  const from  = document.getElementById('n-from').value;
+  const to    = document.getElementById('n-to').value;
+
+  if (!title)     { showError('modal-news-error', 'Bitte eine Überschrift eingeben.'); return; }
+  if (!newsImage) { showError('modal-news-error', 'Bitte ein Bild auswählen.'); return; }
+  if (from && to && to < from) { showError('modal-news-error', '„Bis“ darf nicht vor „Von“ liegen.'); return; }
+
+  const entry = { id: editingNewsId || 'n' + Date.now(), title, text, image: newsImage, from, to };
+  const previous = homeData.news;
+  homeData.news = editingNewsId
+    ? previous.map(n => n.id === editingNewsId ? entry : n)
+    : [entry, ...previous]; // neuester Eintrag zuerst
+
+  const btn = document.getElementById('save-news-btn');
+  btn.disabled = true;
+  try {
+    await saveHome();
+    closeModal('modal-news');
+    showToast(editingNewsId ? 'Eintrag aktualisiert' : 'Eintrag hinzugefügt');
+    renderNews();
+  } catch (e) {
+    homeData.news = previous;
+    showError('modal-news-error', e.message);
+  }
+  btn.disabled = false;
+}
+
+async function deleteNews(id) {
+  const n = homeData.news.find(x => x.id === id);
+  if (!n || !confirm(`Eintrag „${n.title}" wirklich löschen?`)) return;
+  const previous = homeData.news;
+  homeData.news = previous.filter(x => x.id !== id);
+  try {
+    await saveHome();
+    showToast('Eintrag gelöscht');
+  } catch (e) {
+    homeData.news = previous;
+    alert('Fehler beim Löschen: ' + e.message);
+  }
+  renderNews();
+}
+
+/* ── Highlights ── */
+/* ── Highlights: quadratischen Ausschnitt wählen ── */
+let focusWorkId = null;
+let focusPos    = '50% 50%';
+
+function openHighlightFocus(i) {
+  const work = galleryData.works.find(w => w.id === homeData.highlights[i]);
+  if (!work) return;
+  focusWorkId = work.id;
+  focusPos    = homeData.focus[work.id] || '50% 50%';
+  const url = workImagesOf(work)[0] || '';
+  const img = document.getElementById('focus-img');
+  document.getElementById('focus-preview').style.backgroundImage = `url("${url.replace(/"/g, '%22')}")`;
+  img.onload = () => setFocusPos(focusPos);
+  img.src = url;
+  document.getElementById('modal-focus').style.display = 'flex';
+  if (img.complete) setFocusPos(focusPos);
+}
+
+function setFocusPos(pos) {
+  focusPos = pos;
+  placeFocusMarker(document.getElementById('focus-marker'), pos);
+  document.getElementById('focus-preview').style.backgroundPosition = pos;
+}
+
+function pickFocus(event) {
+  const pos = focusPercentFromClick(document.getElementById('focus-img'), event.clientX, event.clientY);
+  if (pos) setFocusPos(pos);
+}
+
+async function saveHighlightFocus() {
+  const previous = { ...homeData.focus };
+  if (focusPos === '50% 50%') delete homeData.focus[focusWorkId];
+  else homeData.focus[focusWorkId] = focusPos;
+  try {
+    await saveHome();
+    closeModal('modal-focus');
+    showToast('Ausschnitt gespeichert');
+    renderHighlights();
+  } catch (e) {
+    homeData.focus = previous;
+    showError('modal-focus-error', e.message);
+  }
+}
+
+/* ── Highlights: Liste ── */
+function renderHighlights() {
+  const list  = document.getElementById('highlights-list');
+  const works = homeData.highlights.map(id => galleryData.works.find(w => w.id === id));
+  document.getElementById('highlight-add-btn').disabled = works.length >= MAX_HIGHLIGHTS;
+
+  if (!works.length) {
+    list.innerHTML = '<p style="color:var(--ink-f);padding:.5rem 0">Nichts ausgewählt – die Startseite zeigt automatisch die ersten Werke der Galerie.</p>';
+    return;
+  }
+  list.innerHTML = works.map((w, i) => `<div class="work-row">
+    <img src="${escHtml(workImagesOf(w)[0] || '')}" alt="" loading="lazy" style="object-position:${escAttr(homeData.focus[w.id] || '50% 50%')}">
+    <div class="work-info">
+      <div class="work-title">${i + 1}. ${escHtml(w.title)}</div>
+      <div class="work-meta">${escHtml(galleryData.styles.find(s => s.id === w.styleId)?.name || '')}</div>
+    </div>
+    <div class="work-actions">
+      <button class="btn-secondary" onclick="openHighlightFocus(${i})" title="Bildausschnitt wählen">Ausschnitt</button>
+      <button class="btn-secondary" onclick="moveHighlight(${i}, -1)" ${i === 0 ? 'disabled' : ''} title="Nach vorn">←</button>
+      <button class="btn-secondary" onclick="moveHighlight(${i}, 1)" ${i === works.length - 1 ? 'disabled' : ''} title="Nach hinten">→</button>
+      <button class="btn-danger"    onclick="setHighlights(homeData.highlights.filter((_, k) => k !== ${i}))">Entfernen</button>
+    </div>
+  </div>`).join('');
+}
+
+async function setHighlights(ids) {
+  const previous = homeData.highlights;
+  homeData.highlights = ids;
+  try {
+    await saveHome();
+    hideError('home-error');
+  } catch (e) {
+    homeData.highlights = previous;
+    showError('home-error', e.message);
+  }
+  renderHighlights();
+  if (document.getElementById('modal-pick').style.display === 'flex') renderPickGrid();
+}
+
+function moveHighlight(i, delta) {
+  const ids = [...homeData.highlights];
+  [ids[i], ids[i + delta]] = [ids[i + delta], ids[i]];
+  setHighlights(ids);
+}
+
+function openHighlightPicker() {
+  const sel = document.getElementById('pick-style');
+  sel.innerHTML = '<option value="">Alle Stile</option>' +
+    galleryData.styles.map(s => `<option value="${escHtml(s.id)}">${escHtml(s.name)}</option>`).join('');
+  document.getElementById('modal-pick').style.display = 'flex';
+  renderPickGrid();
+}
+
+function renderPickGrid() {
+  const styleId = document.getElementById('pick-style').value;
+  const works   = galleryData.works.filter(w => !styleId || w.styleId === styleId);
+  document.getElementById('pick-hint').textContent =
+    `${homeData.highlights.length} von ${MAX_HIGHLIGHTS} ausgewählt – zum Auswählen oder Abwählen anklicken.`;
+  document.getElementById('pick-grid').innerHTML = works.map(w => {
+    const selected = homeData.highlights.includes(w.id);
+    return `<button type="button" class="pick-tile${selected ? ' selected' : ''}" onclick="togglePick('${escHtml(w.id)}')">
+      <img src="${escHtml(workImagesOf(w)[0] || '')}" alt="" loading="lazy">
+      <span>${escHtml(w.title)}</span>
+    </button>`;
+  }).join('') || '<p style="color:var(--ink-f)">Keine Werke in diesem Stil.</p>';
+}
+
+function togglePick(id) {
+  if (homeData.highlights.includes(id)) return setHighlights(homeData.highlights.filter(x => x !== id));
+  if (homeData.highlights.length >= MAX_HIGHLIGHTS) return showToast(`Maximal ${MAX_HIGHLIGHTS} Highlights – zuerst eines abwählen.`);
+  setHighlights([...homeData.highlights, id]);
 }

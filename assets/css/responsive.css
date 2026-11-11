@@ -14,8 +14,8 @@
   }
 
   .nav-links a {
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
   }
 
   .hero-frame {
@@ -56,6 +56,10 @@
     max-width: 220px;
   }
 
+  .news {
+    padding: 0 1.25rem 2.25rem;
+  }
+
   .highlights {
     padding: 1.75rem 1.25rem 2.25rem;
   }
@@ -89,11 +93,15 @@
     object-position: center 15%;
   }
 
-  .ueber-sections,
+  .ueber-section,
   .style-grid,
   .kurs-times,
   .preis-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ueber-section:nth-child(even) .ueber-text {
+    order: 0;
   }
 
   .witem {

@@ -5,7 +5,7 @@
 (() => {
   const realFetch = window.fetch.bind(window);
   const PREFIX = 'agb-demo:';
-  const SEEDS = { gallery: 'data/gallery.json', courses: 'data/courses.json', settings: 'data/settings.json' };
+  const SEEDS = { gallery: 'data/gallery.json', courses: 'data/courses.json', settings: 'data/settings.json', home: 'data/home.json' };
 
   const load = (k) => { try { return JSON.parse(localStorage.getItem(PREFIX + k)); } catch { return null; } };
   const save = (k, v) => { try { localStorage.setItem(PREFIX + k, JSON.stringify(v)); return true; } catch { return false; } };
@@ -47,7 +47,7 @@
         const stored = load(name);
         if (stored) return reply(stored);
         const seed = await realFetch(SEEDS[name]).catch(() => null);
-        return seed?.ok ? seed : reply(name === 'settings' ? { aiStyleNotes: '' } : {});
+        return seed?.ok ? seed : reply(name === 'settings' ? { aiStyleNotes: '' } : name === 'home' ? { highlights: [], news: [] } : {});
       }
       if (!isAuthed()) return reply({ ok: false, error: 'Nicht autorisiert' }, 403);
       const ok = save(name, JSON.parse(opts.body));

@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin · Annette Gerke-Bischoff</title>
-<link rel="stylesheet" href="assets/css/fonts.css?v=1792439122">
-<link rel="stylesheet" href="admin/admin.css?v=1783626697">
+<link rel="stylesheet" href="assets/css/fonts.css?v=1794416554">
+<link rel="stylesheet" href="admin/admin.css?v=1794416591">
 </head>
 <body>
 
@@ -31,6 +31,7 @@
   <header class="topbar">
     <div class="topbar-title">Annette Gerke-Bischoff &nbsp;<span class="topbar-sep">·</span>&nbsp; Admin</div>
     <div style="display:flex;gap:0.75rem;align-items:center">
+      <button class="section-btn"        id="sbtn-startseite"    onclick="showSection('startseite',this)">Startseite</button>
       <button class="section-btn active" id="sbtn-galerie"       onclick="showSection('galerie',this)">Galerie</button>
       <button class="section-btn"        id="sbtn-kurse"         onclick="showSection('kurse',this)">Kursangebote</button>
       <button class="section-btn"        id="sbtn-einstellungen" onclick="showSection('einstellungen',this)">Einstellungen</button>
@@ -63,6 +64,24 @@
       </div>
     </div>
 
+    <!-- ══════════ SEKTION: STARTSEITE (Reihenfolge wie auf der Website) ══════════ -->
+    <div id="section-startseite" style="display:none">
+      <div class="view-head">
+        <h2>Highlights</h2>
+        <button class="btn-primary" id="highlight-add-btn" onclick="openHighlightPicker()">+ Werk auswählen</button>
+      </div>
+      <p class="section-hint">Bis zu <span id="max-highlights">4</span> Werke aus der Galerie, die auf der Startseite als „Highlights aus dem Atelier“ gezeigt werden. Ist nichts ausgewählt, zeigt die Startseite automatisch die ersten Werke.</p>
+      <div id="highlights-list" class="works-list"></div>
+      <div id="home-error" class="error-msg" style="display:none;margin-top:1rem"></div>
+
+      <div class="view-head" style="margin-top:2.5rem">
+        <h2>Aktuelles</h2>
+        <button class="btn-primary" onclick="openNewsModal()">+ Eintrag hinzufügen</button>
+      </div>
+      <p class="section-hint">Ausstellungen, Specials, Gutscheine … Ein Eintrag erscheint auf der Startseite unter den Highlights, solange das heutige Datum im Zeitraum liegt, und verschwindet danach von selbst. Gibt es keinen aktiven Eintrag, fehlt der ganze Bereich „Aktuelles“.</p>
+      <div id="news-list" class="works-list"></div>
+    </div>
+
     <!-- ══════════ SEKTION: KURSANGEBOTE ══════════ -->
     <div id="section-kurse" style="display:none">
       <div class="view-head" style="margin-bottom:1.5rem">
@@ -77,73 +96,71 @@
         <button class="kurs-admin-tab"        onclick="switchCourseTab('atel',this)">Das Atelier</button>
       </div>
 
-      <!-- ── Tab: Mal- & Kreativkurse ── -->
+      <!-- ── Tab: Mal- & Kreativkurse (Aufbau wie die Kursseite) ── -->
       <div class="kurs-admin-panel active" id="cadmin-mal">
-        <div class="ca-section">
-          <h4>Texte</h4>
-          <div class="form-row"><label>Eyebrow (kleiner Hinweistext)</label><input type="text" id="k-eyebrow"></div>
-          <div class="form-row"><label>Titel</label><input type="text" id="k-title"></div>
-          <div class="form-row"><label>Beschreibung</label><textarea id="k-desc" rows="2"></textarea></div>
-          <div class="form-row"><label>Hinweis (Fußnote)</label><textarea id="k-hint" rows="2"></textarea></div>
-        </div>
+        <div class="mirror">
+          <p class="mirror-hint">Der Aufbau entspricht der Kursseite. Zum Ändern direkt in einen Text klicken.</p>
 
-        <div class="ca-section">
-          <h4>Kurszeiten</h4>
-          <div id="zeiten-list"></div>
-          <button class="btn-secondary" style="margin-top:0.5rem" onclick="addZeit()">+ Zeit hinzufügen</button>
-        </div>
-
-        <div class="ca-section">
-          <h4>Kalender-Termine</h4>
-          <p style="font-size:0.78rem;color:var(--ink-f);margin-bottom:0.75rem">Klicke auf einen Tag um ihn als Termin zu markieren (rot) oder wieder zu entfernen.</p>
-          <div id="admin-kalender" class="admin-kal-wrap"></div>
-          <div class="form-row" style="margin-top:1rem">
-            <label>Jahr</label>
-            <input type="number" id="k-jahr" style="width:120px" min="2024" max="2035">
+          <div class="mirror-intro">
+            <input class="mirror-eyebrow" type="text" id="k-eyebrow" placeholder="Kleiner Hinweistext über der Überschrift">
+            <input class="mirror-title" type="text" id="k-title" placeholder="Titel">
+            <textarea class="mirror-text" id="k-desc" rows="2" placeholder="Beschreibung"></textarea>
           </div>
-          <button class="btn-secondary" style="margin-top:0.5rem" onclick="addMonat()">+ Monat hinzufügen</button>
-        </div>
 
-        <div class="ca-section">
-          <h4>Preise</h4>
-          <div id="preise-list"></div>
-          <button class="btn-secondary" style="margin-top:0.5rem" onclick="addPreis('preise-list','kurse')">+ Preis hinzufügen</button>
-        </div>
+          <div id="kurs-boxen" class="mirror-boxes"></div>
 
-        <div class="ca-section">
-          <h4>Einzelstunden-Tabelle</h4>
+          <h4 class="mirror-heading">Slideshow: Werke aus den Kursen</h4>
+          <p class="section-hint" style="margin-top:0">Läuft auf der Kursseite direkt über dem Kalender automatisch durch. Bilder hinzufügen (mehrere auf einmal möglich) und mit den Pfeilen ordnen. Ohne Bilder wird die Slideshow nicht angezeigt.</p>
+          <div id="slideshow-list"></div>
+          <input type="file" id="slide-file" accept="image/*" multiple style="display:none" onchange="addSlides(this)">
+          <small id="slideshow-status"></small>
+
+          <div class="mirror-calbar">
+            <button class="btn-primary" onclick="openKalenderModal()">Kalender bearbeiten …</button>
+            <span id="kal-summary"></span>
+          </div>
+
+          <textarea class="mirror-note" id="k-hint" rows="3" placeholder="Hinweis (Fußnote)"></textarea>
+
+          <h4 class="mirror-heading">Preise</h4>
+          <div id="preise-list" class="mirror-price-grid"></div>
+
           <div id="einzeln-list"></div>
-          <div class="form-row" style="margin-top:0.75rem"><label>Hinweis unter Tabelle</label><input type="text" id="k-einzeln-note"></div>
+
+          <h4 class="mirror-heading">Gutschein / Spezialangebot</h4>
+          <p class="section-hint" style="margin-top:0">Kleiner Hinweisblock unter der Privatstunden-Tabelle, z. B. für ein Weihnachtsspecial oder Gutscheine. Er erscheint nur, solange das heutige Datum im Zeitraum liegt, und nur, wenn ein Text eingetragen ist.</p>
+          <div id="angebot-box"></div>
         </div>
       </div>
 
       <!-- ── Tab: Geburtstage ── -->
       <div class="kurs-admin-panel" id="cadmin-geb">
-        <div class="ca-section">
-          <h4>Texte</h4>
-          <div class="form-row"><label>Eyebrow</label><input type="text" id="g-eyebrow"></div>
-          <div class="form-row"><label>Titel</label><input type="text" id="g-title"></div>
-          <div class="form-row"><label>Beschreibung</label><textarea id="g-desc" rows="2"></textarea></div>
-          <div class="form-row"><label>Absatz 1</label><textarea id="g-text1" rows="2"></textarea></div>
-          <div class="form-row"><label>Absatz 2</label><textarea id="g-text2" rows="2"></textarea></div>
-          <div class="form-row"><label>Absatz 3</label><textarea id="g-text3" rows="2"></textarea></div>
-        </div>
-        <div class="ca-section">
-          <h4>Preise</h4>
-          <div id="geb-preise-list"></div>
-          <button class="btn-secondary" style="margin-top:0.5rem" onclick="addPreis('geb-preise-list','geburtstag')">+ Preis hinzufügen</button>
+        <div class="mirror">
+          <p class="mirror-hint">Der Aufbau entspricht der Kursseite. Zum Ändern direkt in einen Text klicken.</p>
+          <div class="mirror-intro">
+            <input class="mirror-eyebrow" type="text" id="g-eyebrow" placeholder="Kleiner Hinweistext über der Überschrift">
+            <input class="mirror-title" type="text" id="g-title" placeholder="Titel">
+            <textarea class="mirror-text" id="g-desc" rows="2" placeholder="Beschreibung"></textarea>
+          </div>
+          <textarea class="mirror-text" id="g-text1" rows="2" placeholder="Absatz 1"></textarea>
+          <textarea class="mirror-text" id="g-text2" rows="2" placeholder="Absatz 2"></textarea>
+          <textarea class="mirror-text" id="g-text3" rows="2" placeholder="Absatz 3"></textarea>
+          <h4 class="mirror-heading">Preise</h4>
+          <div id="geb-preise-list" class="mirror-price-grid"></div>
         </div>
       </div>
 
       <!-- ── Tab: Atelier ── -->
       <div class="kurs-admin-panel" id="cadmin-atel">
-        <div class="ca-section">
-          <h4>Texte</h4>
-          <div class="form-row"><label>Eyebrow</label><input type="text" id="a-eyebrow"></div>
-          <div class="form-row"><label>Titel</label><input type="text" id="a-title"></div>
-          <div class="form-row"><label>Beschreibung</label><textarea id="a-desc" rows="2"></textarea></div>
-          <div class="form-row"><label>Absatz 1</label><textarea id="a-text1" rows="3"></textarea></div>
-          <div class="form-row"><label>Absatz 2</label><textarea id="a-text2" rows="2"></textarea></div>
+        <div class="mirror">
+          <p class="mirror-hint">Der Aufbau entspricht der Kursseite. Zum Ändern direkt in einen Text klicken.</p>
+          <div class="mirror-intro">
+            <input class="mirror-eyebrow" type="text" id="a-eyebrow" placeholder="Kleiner Hinweistext über der Überschrift">
+            <input class="mirror-title" type="text" id="a-title" placeholder="Titel">
+            <textarea class="mirror-text" id="a-desc" rows="2" placeholder="Beschreibung"></textarea>
+          </div>
+          <textarea class="mirror-text" id="a-text1" rows="3" placeholder="Absatz 1"></textarea>
+          <textarea class="mirror-text" id="a-text2" rows="2" placeholder="Absatz 2"></textarea>
         </div>
       </div>
 
@@ -195,7 +212,6 @@
       <div id="upload-status" class="upload-status" style="display:none"></div>
     </div>
     <div class="form-row"><label class="checkbox-label"><input type="checkbox" id="w-sold"> Werk ist verkauft</label></div>
-    <div class="form-row"><label class="checkbox-label"><input type="checkbox" id="w-highlight"> Auf der Startseite hervorheben</label></div>
     <div id="modal-error" class="error-msg" style="display:none"></div>
     <div class="modal-btns">
       <button class="btn-secondary" onclick="closeModal('modal-work')">Abbrechen</button>
@@ -220,9 +236,9 @@
         </div>
       </div>
       <div id="style-current-wrap" style="display:none">
-        <small>Aktuelles Bild – zum Ändern des Bildausschnitts anklicken:</small><br>
+        <small>Die Stil-Kacheln sind quadratisch. Klicke auf die Stelle, die im Mittelpunkt stehen soll (der helle Rahmen zeigt den sichtbaren Ausschnitt):</small><br>
         <div id="style-current-picker" class="focus-picker">
-          <img id="style-current-thumb" style="max-height:120px;margin-top:4px;border-radius:4px;" alt="">
+          <img id="style-current-thumb" style="max-height:280px;max-width:100%;margin-top:4px;" alt="">
           <div id="style-current-marker" class="focus-marker"></div>
         </div>
       </div>
@@ -236,7 +252,93 @@
   </div>
 </div>
 
+<!-- ══ MODAL Kalender ══ -->
+<div id="modal-kal" class="modal-overlay" style="display:none" onclick="if (event.target === this) cancelKalenderModal()">
+  <div class="modal-box modal-box-wide">
+    <h3>Kalender bearbeiten</h3>
+    <p class="section-hint" style="margin-top:0">Die Kurse laufen jede Woche an ihrem Wochentag weiter (Wochentag und Uhrzeit stellst du direkt in den Kurs-Boxen ein). Gesetzliche Feiertage in NRW entfallen automatisch – diese Tage bleiben im Kalender einfach weiß.</p>
+
+    <h4 class="modal-sub">Laufzeit der Kurse</h4>
+    <div id="kal-laufzeit"></div>
+
+    <h4 class="modal-sub">Ausfälle</h4>
+    <p class="section-hint" style="margin-top:0">Einmalige Ausnahmen (z. B. Krankheit oder Ferien). Für mehrere Tage am Stück „bis“ ausfüllen.</p>
+    <div id="kal-ausfaelle"></div>
+    <button class="btn-secondary" onclick="addAusfall()">+ Ausfall hinzufügen</button>
+
+    <h4 class="modal-sub">Besondere Termine</h4>
+    <p class="section-hint" style="margin-top:0">Außerplanmäßige Termine, z. B. ein Workshop. Sie erscheinen im Kalender in der gewählten Farbe und darunter als Hinweis.</p>
+    <div id="kal-specials"></div>
+    <button class="btn-secondary" onclick="addSpecial()">+ Besonderen Termin hinzufügen</button>
+
+    <div id="modal-kal-error" class="error-msg" style="display:none;margin-top:1rem"></div>
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="cancelKalenderModal()">Abbrechen</button>
+      <button class="btn-primary" onclick="saveKalenderModal()">Speichern</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODALS Startseite ══ -->
+<div id="modal-news" class="modal-overlay" style="display:none" onclick="if (event.target === this) closeModal('modal-news')">
+  <div class="modal-box">
+    <h3 id="modal-news-title">Aktuelles: Eintrag hinzufügen</h3>
+    <div class="form-row"><label>Überschrift *</label><input type="text" id="n-title" placeholder="z.B. Ausstellung im Kunstverein"></div>
+    <div class="form-row"><label>Kurzer Text</label><textarea id="n-text" rows="3" placeholder="Worum geht es? Ein, zwei Sätze genügen."></textarea></div>
+    <div class="form-row">
+      <label>Bild *</label>
+      <div class="upload-area" onclick="document.getElementById('n-file').click()">
+        <input type="file" id="n-file" accept="image/*" style="display:none" onchange="handleNewsFile(this)">
+        <img id="n-preview" alt="Vorschau" style="display:none">
+        <div id="n-placeholder"><span>Bild auswählen</span><small>JPG, PNG, WEBP · max. 10 MB</small></div>
+      </div>
+    </div>
+    <div class="form-row"><label>Von (Beginn, wird klein angezeigt – leer = sofort sichtbar)</label><input type="date" id="n-from"></div>
+    <div class="form-row"><label>Bis (letzter Tag – danach wird der Eintrag ausgeblendet; leer = unbefristet)</label><input type="date" id="n-to"></div>
+    <div id="modal-news-error" class="error-msg" style="display:none"></div>
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="closeModal('modal-news')">Abbrechen</button>
+      <button class="btn-primary" id="save-news-btn" onclick="saveNews()">Speichern</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-pick" class="modal-overlay" style="display:none" onclick="if (event.target === this) closeModal('modal-pick')">
+  <div class="modal-box modal-box-wide">
+    <h3>Highlights auswählen</h3>
+    <p class="section-hint" id="pick-hint"></p>
+    <div class="form-row"><label>Stil</label><select id="pick-style" onchange="renderPickGrid()"></select></div>
+    <div id="pick-grid" class="pick-grid"></div>
+    <div class="modal-btns">
+      <button class="btn-primary" onclick="closeModal('modal-pick')">Fertig</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-focus" class="modal-overlay" style="display:none" onclick="if (event.target === this) closeModal('modal-focus')">
+  <div class="modal-box">
+    <h3>Ausschnitt für die Startseite</h3>
+    <p class="section-hint" style="margin-top:0">Die Highlights werden quadratisch gezeigt. Klicke auf die Stelle des Bildes, die im Mittelpunkt stehen soll. Der helle Rahmen zeigt den sichtbaren Ausschnitt.</p>
+    <div class="focus-row">
+      <div class="focus-picker" id="focus-picker" onclick="pickFocus(event)">
+        <img id="focus-img" alt="">
+        <div id="focus-marker" class="focus-marker"></div>
+      </div>
+      <div class="focus-preview-wrap">
+        <small>So sieht es aus:</small>
+        <div id="focus-preview" class="focus-preview"></div>
+      </div>
+    </div>
+    <div id="modal-focus-error" class="error-msg" style="display:none"></div>
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="closeModal('modal-focus')">Abbrechen</button>
+      <button class="btn-primary" onclick="saveHighlightFocus()">Speichern</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast" class="toast" style="display:none"></div>
-<script src="admin/admin.js?v=1783626953"></script>
+<script src="assets/js/angebot.js?v=1794416553"></script>
+<script src="admin/admin.js?v=1794416591"></script>
 </body>
 </html>

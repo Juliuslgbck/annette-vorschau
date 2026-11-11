@@ -14,7 +14,7 @@
 
 .galerie-intro h2 {
   margin-bottom: 0.35rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 4vw, 2.2rem);
   font-style: italic;
@@ -24,7 +24,7 @@
 .galerie-intro p {
   max-width: 360px;
   margin: 0 auto;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.84rem;
 }
 
@@ -36,7 +36,7 @@
 
 .style-card {
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 2px;
   background: #fff;
   cursor: pointer;
@@ -51,19 +51,19 @@
 .sthumb {
   display: block;
   width: 100%;
-  height: 220px;
-  background: var(--gold-l);
+  aspect-ratio: 1 / 1; /* quadratisch; der Ausschnitt (object-position) wird im Admin gewaehlt */
+  background: var(--bg-strong);
   object-fit: cover;
 }
 
 .sinfo {
   padding: 0.9rem 1.1rem 1.1rem;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
 }
 
 .sname {
   margin-bottom: 0.2rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: 1.2rem;
   font-style: italic;
@@ -72,14 +72,14 @@
 
 .scount {
   margin-bottom: 0.35rem;
-  color: var(--gold);
+  color: var(--text-soft);
   font-size: 0.64rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .sdesc {
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.76rem;
   line-height: 1.5;
 }
@@ -89,7 +89,7 @@
   margin-top: 0.75rem;
   padding-bottom: 1px;
   border-bottom: 1px solid rgba(139, 34, 82, 0.25);
-  color: var(--crimson);
+  color: var(--brand);
   font-size: 0.67rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -108,7 +108,7 @@
   padding: 0;
   border: none;
   background: none;
-  color: var(--ink-s);
+  color: var(--text-soft);
   cursor: pointer;
   font-size: 0.67rem;
   letter-spacing: 0.14em;
@@ -117,7 +117,7 @@
 }
 
 .gback:hover {
-  color: var(--crimson);
+  color: var(--brand);
 }
 
 .gback svg {
@@ -131,12 +131,12 @@
 .ghead {
   margin-bottom: 1.25rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
 }
 
 .ghead h2 {
   margin-bottom: 0.3rem;
-  color: var(--crimson);
+  color: var(--brand);
   font-family: var(--font-display);
   font-size: clamp(1.7rem, 5vw, 2.5rem);
   font-style: italic;
@@ -146,13 +146,13 @@
 
 .ghead p {
   max-width: 520px;
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.8rem;
 }
 
 .wcount {
   margin-bottom: 1.4rem;
-  color: var(--ink-f);
+  color: var(--text-faint);
   font-size: 0.7rem;
   letter-spacing: 0.05em;
 }
@@ -168,7 +168,7 @@
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 2px;
   background: #fff;
   transition: box-shadow 0.2s;
@@ -179,7 +179,7 @@
 }
 
 .witem-highlighted {
-  outline: 3px solid var(--lila);
+  outline: 3px solid var(--accent);
   outline-offset: 4px;
   animation: witem-pulse 1.5s ease-in-out 1;
 }
@@ -204,7 +204,7 @@
   width: 100%;
   height: 100%;
   min-height: 260px;
-  background: var(--gold-l);
+  background: var(--bg-strong);
   object-fit: cover;
 }
 
@@ -214,7 +214,7 @@
   left: 0;
   padding: 0.4rem 1rem;
   border-top-right-radius: 2px;
-  background: var(--crimson);
+  background: var(--brand);
   color: #fff;
   font-size: 0.66rem;
   letter-spacing: 0.14em;
@@ -270,7 +270,7 @@
 
 .wtitle {
   margin-bottom: 0.3rem;
-  color: var(--ink);
+  color: var(--text);
   font-family: var(--font-display);
   font-size: clamp(1.2rem, 3vw, 1.75rem);
   font-style: italic;
@@ -280,7 +280,7 @@
 
 .wmeta {
   margin-bottom: 0.75rem;
-  color: var(--ink-f);
+  color: var(--text-faint);
   font-size: 0.76rem;
   line-height: 1.6;
 }
@@ -289,7 +289,7 @@
   flex: 1;
   padding-left: 0.85rem;
   border-left: 2px solid rgba(139, 34, 82, 0.2);
-  color: var(--ink-s);
+  color: var(--text-soft);
   font-size: 0.82rem;
   font-style: italic;
   line-height: 1.7;
@@ -297,7 +297,7 @@
 
 .wprice {
   margin-top: 0.75rem;
-  color: var(--ink);
+  color: var(--text);
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 500;
@@ -307,9 +307,9 @@
   align-self: flex-start;
   margin-top: 1.25rem;
   padding: 0.55rem 1.3rem;
-  border: 1px solid var(--lila);
+  border: 1px solid var(--accent);
   border-radius: 1px;
-  background: var(--lila);
+  background: var(--accent);
   color: #fff;
   cursor: pointer;
   font-family: var(--font-body);
@@ -324,16 +324,16 @@
 }
 
 .abtn:disabled {
-  border-color: var(--border);
-  background: var(--paper-warm);
-  color: var(--ink-f);
+  border-color: var(--line);
+  background: var(--bg-strong);
+  color: var(--text-faint);
   cursor: default;
   opacity: 1;
 }
 
 .empty {
   padding: 3rem;
-  color: var(--ink-f);
+  color: var(--text-faint);
   font-family: var(--font-display);
   font-style: italic;
   text-align: center;
