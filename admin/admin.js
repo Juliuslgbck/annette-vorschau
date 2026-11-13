@@ -122,9 +122,9 @@ async function saveGallery() {
     body: JSON.stringify(galleryData)
   }).catch(() => null);
 
-  if (!res?.ok) throw new Error('Speichern fehlgeschlagen');
-  const data = await res.json();
-  if (!data.ok) throw new Error(data.error || 'Speichern fehlgeschlagen');
+  // Die Fehlermeldung des Servers (z.B. "Inhalt zwischenzeitlich geaendert") auch bei einem Fehlerstatus anzeigen
+  const data = await res?.json().catch(() => null);
+  if (!data?.ok) throw new Error(data?.error || 'Speichern fehlgeschlagen');
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
