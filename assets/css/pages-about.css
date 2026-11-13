@@ -81,6 +81,10 @@
   gap: 2.5rem;
 }
 
+.ueber-section--text {
+  grid-template-columns: 1fr; /* Abschnitt ohne Foto: Text ueber die volle Breite */
+}
+
 .ueber-section:nth-child(even) .ueber-text {
   order: 2;
 }

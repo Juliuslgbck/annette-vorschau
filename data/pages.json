@@ -1,0 +1,201 @@
+{
+    "about": {
+        "portrait": {
+            "src": "media/about-portrait.jpg",
+            "alt": "Annette Gerke-Bischoff"
+        },
+        "eyebrow": "Zur Künstlerin",
+        "name": "Annette Gerke-Bischoff",
+        "intro": [
+            "1964 in Frankfurt am Main geboren, lebt und arbeitet Annette Gerke-Bischoff in Gütersloh. Seit 2011 führt sie ein eigenes Atelier mit Schwerpunkt auf realistischer Malerei und verschiedenen Techniken.",
+            "Ihre Werke umfassen Mischtechnik, Aquarell, Öl, Acryl, Collage und Skulptur in Holz. Seit 2012 bietet sie Mal- und Kreativkurse für Kinder und Erwachsene an und ist seit 2016 Mitglied im Kunstverein Gruppe 13 e.V."
+        ],
+        "quote": {
+            "text": "„Was du in anderen entzünden willst, muss in dir selbst brennen.\"",
+            "author": "Aurelius Augustinus"
+        },
+        "sections": [
+            {
+                "title": "Ausbildung",
+                "items": [
+                    {
+                        "year": "1983",
+                        "text": "Fachoberschule für Gestaltung, Bielefeld"
+                    },
+                    {
+                        "year": "2008",
+                        "text": "Kunstakademie für freie Malerei und Grafik, Verl"
+                    },
+                    {
+                        "year": "2009",
+                        "text": "Malerei und Grafik, IBKK Bochum"
+                    },
+                    {
+                        "year": "2015",
+                        "text": "Diplom in Malerei und Grafik"
+                    }
+                ],
+                "images": [
+                    {
+                        "src": "media/about-diplom.jpg",
+                        "alt": "Fahrräder – Mischtechnik, 2015"
+                    }
+                ]
+            },
+            {
+                "title": "Ausstellungen",
+                "items": [
+                    {
+                        "year": "2025",
+                        "text": "Gruppe 13, Haus Samson — „Schwarz weiß trifft bunt\""
+                    },
+                    {
+                        "year": "2024",
+                        "text": "Gruppe 13 — „Magie des Lichts\""
+                    },
+                    {
+                        "year": "2023",
+                        "text": "Gruppe 13 — „Auf den zweiten Blick\""
+                    },
+                    {
+                        "year": "2022",
+                        "text": "„Kunst im Küsterhaus\", Rheda-Wiedenbrück"
+                    },
+                    {
+                        "year": "2021",
+                        "text": "Gruppe 13 — „Der blaue Planet\""
+                    },
+                    {
+                        "year": "2020",
+                        "text": "ARKA Kulturwerkstatt, Zeche Zollverein, Essen"
+                    },
+                    {
+                        "year": "2019",
+                        "text": "Einzelausstellung, Lange Nacht der Kunst, Gütersloh"
+                    },
+                    {
+                        "year": "2018",
+                        "text": "Gemeinschaftsausstellung Giethoorn, Niederlande"
+                    },
+                    {
+                        "year": "2017",
+                        "text": "„Auszeit\", Kunsthaus Erkrath"
+                    },
+                    {
+                        "year": "2015",
+                        "text": "Einzelausstellung, LWL Klinikum Gütersloh"
+                    }
+                ],
+                "images": [
+                    {
+                        "src": "media/about-ausstellung-kubi.jpg",
+                        "alt": "Annette Gerke-Bischoff mit einem ihrer Werke bei einer Ausstellung im KUBI Harsewinkel"
+                    },
+                    {
+                        "src": "media/about-ausstellung-vernissage.jpg",
+                        "alt": "Annette Gerke-Bischoff erläutert Besuchern bei einer Ausstellung ihre Werke"
+                    }
+                ]
+            },
+            {
+                "title": "Fortbildungen",
+                "items": [
+                    {
+                        "year": "2025",
+                        "text": "Radierung; Holzbildhauerei; Feuer und Eisen, Sommerakademie Borgholzhausen"
+                    },
+                    {
+                        "year": "2024",
+                        "text": "Holzbildhauerei bei Johannes Zoller; Radierung bei Helmut Dohrmann"
+                    },
+                    {
+                        "year": "2017",
+                        "text": "Kaltnadelradierung bei Era Freizon; Bildhauerei bei Karl Heinz Gies"
+                    },
+                    {
+                        "year": "2013",
+                        "text": "„Freie Malerei\" bei Thorsten Lehmann"
+                    },
+                    {
+                        "year": "2011",
+                        "text": "„Von der Zeichnung bis zum Gemälde\" bei Prof. Wlodzimierz Lajming"
+                    }
+                ],
+                "images": [
+                    {
+                        "src": "media/about-fortbildung.jpg",
+                        "alt": "Annette Gerke-Bischoff beim Schweißen"
+                    }
+                ]
+            },
+            {
+                "title": "Atelier & Mitgliedschaften",
+                "items": [
+                    {
+                        "year": "2016",
+                        "text": "Mitglied im Kunstverein Gruppe 13 e.V."
+                    },
+                    {
+                        "year": "2012",
+                        "text": "Mal- und Kreativkurse für Kinder und Erwachsene ([siehe Kursangebote](kursangebote.php))"
+                    },
+                    {
+                        "year": "2011",
+                        "text": "Eigenes Atelier, Rudolf-Harbig-Weg 3, Gütersloh — Schwerpunkt realistische Malerei"
+                    }
+                ],
+                "images": [
+                    {
+                        "src": "media/about-gruppe13.jpg",
+                        "alt": "Mitglieder des Kunstvereins Gruppe 13 vor dem Haus Samson"
+                    }
+                ]
+            }
+        ],
+        "contact": {
+            "title": "Kontakt",
+            "text": "Annette Gerke-Bischoff · Rudolf-Harbig-Weg 3 · 33332 Gütersloh\nTel.: [05241 / 527 02 80](tel:052415270280) · E-Mail: annettegerke3@aol.com"
+        }
+    },
+    "impressum": {
+        "title": "Impressum & Datenschutz",
+        "blocks": [
+            {
+                "heading": "Angaben gemäß § 5 TMG",
+                "text": "**Annette Gerke-Bischoff**\nRudolf-Harbig-Weg 3\n33332 Gütersloh\n\nTel.: [05241 / 527 02 80](tel:052415270280)\nE-Mail: annettegerke3@aol.com\nInternet: [www.annettegerkebischoff.de](https://annettegerkebischoff.de)",
+                "boxed": true
+            },
+            {
+                "heading": "",
+                "text": "Keine Umsatzsteuer, da Kleinunternehmer nach § 19 Umsatzsteuergesetz. Inhaltlich verantwortlich nach § 10 Abs. 3 MDStV: Annette Gerke-Bischoff.",
+                "boxed": false
+            },
+            {
+                "heading": "Urheberrecht",
+                "text": "Die Veröffentlichungen auf diesen Seiten — Bilder, Fotos, Grafiken etc. — unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung bedürfen der schriftlichen Zustimmung der Urheberin. Die Verwendung der Inhalte ist weder für den privaten noch für den kommerziellen Gebrauch ohne ausdrückliche Genehmigung gestattet.",
+                "boxed": false
+            },
+            {
+                "heading": "Haftungsausschluss — Inhalt des Internetangebots",
+                "text": "Die Autorin übernimmt keinerlei Gewähr für die Aktualität, Korrektheit, Vollständigkeit oder Qualität der bereitgestellten Informationen. Haftungsansprüche, die sich auf Schäden materieller oder ideeller Art beziehen, sind grundsätzlich ausgeschlossen, sofern kein nachweislich vorsätzliches oder grob fahrlässiges Verschulden vorliegt.",
+                "boxed": false
+            },
+            {
+                "heading": "Haftungsausschluss — Verweise und Links",
+                "text": "Bei direkten oder indirekten Verweisen auf fremde Internetseiten tritt eine Haftungsverpflichtung nur in Kraft, wenn die Autorin von den Inhalten Kenntnis hat und es ihr technisch möglich und zumutbar wäre, die Nutzung bei rechtswidrigen Inhalten zu verhindern. Auf die Gestaltung und die Inhalte verknüpfter Seiten hat die Autorin keinen Einfluss.",
+                "boxed": false
+            },
+            {
+                "heading": "Datenschutzerklärung",
+                "text": "Die Nutzung dieser Website ist grundsätzlich ohne Angabe personenbezogener Daten möglich. Sofern besondere Services in Anspruch genommen werden, kann eine Verarbeitung personenbezogener Daten erforderlich werden. Diese erfolgt stets im Einklang mit der Datenschutz-Grundverordnung (DS-GVO).\n\nSofern eine betroffene Person per E-Mail Kontakt aufnimmt, werden die übermittelten personenbezogener Daten automatisch gespeichert. Diese Daten werden ausschließlich für die Bearbeitung der Anfrage verwendet und nicht an Dritte weitergegeben.",
+                "boxed": false
+            },
+            {
+                "heading": "Ihre Rechte",
+                "text": "Als betroffene Person haben Sie jederzeit das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie das Recht auf Datenübertragbarkeit. Zur Wahrnehmung dieser Rechte wenden Sie sich bitte direkt an: annettegerke3@aol.com",
+                "boxed": false
+            }
+        ],
+        "stand": "2026-11-09"
+    }
+}

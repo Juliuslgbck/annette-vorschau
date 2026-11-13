@@ -27,6 +27,7 @@ let csrfToken            = null; // Schutz-Token fuer aendernde Anfragen, kommt 
 window.addEventListener('DOMContentLoaded', async () => {
   initWorkImageDropzone();
   initStyleFocusPicker();
+  makeFrameDraggable('focus-marker', setFocusPos);
 
   // Prüfen ob schon eingeloggt
   const res = await fetch(API.auth + '?action=check').catch(() => null);
@@ -536,16 +537,46 @@ async function handleStyleFileSelect(input) {
 }
 
 /* ── Fokuspunkt-Picker (Bildausschnitt Stil-Vorschaubild) ── */
-function focusPercentFromClick(imgEl, clientX, clientY) {
-  // Der Klick legt die MITTE des quadratischen Ausschnitts fest; zurueck kommt die passende
-  // CSS-object-position. Entlang der kurzen Bildseite gibt es nichts zu verschieben (50%).
-  const rect = imgEl.getBoundingClientRect();
-  if (!rect.width || !rect.height) return null;
-  const side = Math.min(rect.width, rect.height);
-  const pct = (pos, size) => size > side ? Math.min(100, Math.max(0, (pos - side / 2) / (size - side) * 100)) : 50;
-  return pct(clientX - rect.left, rect.width).toFixed(1) + '% ' + pct(clientY - rect.top, rect.height).toFixed(1) + '%';
-}
+// Den quadratischen Rahmen mit Maus oder Finger verschieben. Der Rahmen kann nur entlang der laengeren
+// Bildseite wandern (quer dazu ist das Bild schon voll sichtbar). onChange bekommt die CSS-object-position.
+function makeFrameDraggable(markerId, onChange) {
+  const marker = document.getElementById(markerId);
+  if (!marker) return;
+  let drag = null;
 
+  marker.addEventListener('pointerdown', (e) => {
+    const img = marker.parentElement.querySelector('img');
+    if (!img || e.button > 0) return;
+    e.preventDefault();
+    marker.setPointerCapture(e.pointerId);
+    drag = { x: e.clientX, y: e.clientY, left: parseFloat(marker.style.left) || 0, top: parseFloat(marker.style.top) || 0, img };
+    marker.classList.add('is-dragging');
+  });
+
+  marker.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const w = drag.img.clientWidth, h = drag.img.clientHeight, side = Math.min(w, h);
+    const clamp = (v, max) => Math.min(max, Math.max(0, v));
+    if (w > h) onChange((w > side ? clamp(drag.left + e.clientX - drag.x, w - side) / (w - side) * 100 : 50).toFixed(1) + '% 50%');
+    else if (h > w) onChange('50% ' + (clamp(drag.top + e.clientY - drag.y, h - side) / (h - side) * 100).toFixed(1) + '%');
+  });
+
+  const stop = () => { drag = null; marker.classList.remove('is-dragging'); };
+  marker.addEventListener('pointerup', stop);
+  marker.addEventListener('pointercancel', stop);
+
+  // Tastatur: Pfeiltasten schieben den Rahmen in 5%-Schritten (Rahmen fokussierbar)
+  marker.addEventListener('keydown', (e) => {
+    const step = { ArrowLeft: -5, ArrowUp: -5, ArrowRight: 5, ArrowDown: 5 }[e.key];
+    if (step === undefined) return;
+    e.preventDefault();
+    const img = marker.parentElement.querySelector('img');
+    const [x, y] = (marker.dataset.pos || '50% 50%').split(' ').map(parseFloat);
+    const next = (v) => Math.min(100, Math.max(0, v + step)).toFixed(1) + '%';
+    if (img.clientWidth > img.clientHeight) onChange(next(x) + ' 50%');
+    else if (img.clientHeight > img.clientWidth) onChange('50% ' + next(y));
+  });
+}
 // Zeichnet den quadratischen Ausschnitt (so wie er auf der Website sichtbar ist) als Rahmen ins Bild.
 function placeFocusMarker(markerEl, positionStr) {
   if (!markerEl) return;
@@ -558,6 +589,8 @@ function placeFocusMarker(markerEl, positionStr) {
   markerEl.style.height = side + 'px';
   markerEl.style.left   = (dw > dh ? (dw - side) * parts[0] / 100 : 0) + 'px';
   markerEl.style.top    = (dh > dw ? (dh - side) * parts[1] / 100 : 0) + 'px';
+  markerEl.dataset.pos = positionStr;
+  markerEl.tabIndex = 0;
   markerEl.style.display = 'block';
 }
 
@@ -569,16 +602,7 @@ function setStyleThumbnailPosition(positionStr) {
 }
 
 function initStyleFocusPicker() {
-  ['style-preview-wrap', 'style-current-picker'].forEach(wrapperId => {
-    const wrapper = document.getElementById(wrapperId);
-    if (!wrapper) return;
-    wrapper.addEventListener('click', (e) => {
-      const img = wrapper.querySelector('img');
-      if (!img || !img.src) return;
-      const pos = focusPercentFromClick(img, e.clientX, e.clientY);
-      if (pos) setStyleThumbnailPosition(pos);
-    });
-  });
+  ['style-preview-marker', 'style-current-marker'].forEach(id => makeFrameDraggable(id, setStyleThumbnailPosition));
 }
 
 async function saveStyle() {
@@ -700,10 +724,13 @@ function showSection(name, btn) {
   document.getElementById('section-galerie').style.display       = name === 'galerie'       ? 'block' : 'none';
   document.getElementById('section-startseite').style.display    = name === 'startseite'    ? 'block' : 'none';
   document.getElementById('section-kurse').style.display         = name === 'kurse'         ? 'block' : 'none';
+  document.getElementById('section-ueber').style.display         = name === 'ueber'         ? 'block' : 'none';
+  document.getElementById('section-impressum').style.display     = name === 'impressum'     ? 'block' : 'none';
   document.getElementById('section-einstellungen').style.display = name === 'einstellungen' ? 'block' : 'none';
   document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   if (name === 'startseite') loadHome();
+  if ((name === 'ueber' || name === 'impressum') && !pagesData) loadPages();
   if (name === 'kurse' && !coursesData) loadCourses();
   if (name === 'einstellungen' && !settingsData) loadSettings();
 }
@@ -1157,6 +1184,190 @@ function escAttr(s) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
+   ÜBER MICH + IMPRESSUM — Admin (api/pages.php, data/pages.json)
+   Aufbau wie die Seiten selbst; Texte mit kleiner Auszeichnung (partials/rich-text.php)
+   ═══════════════════════════════════════════════════════════════════════ */
+let pagesData = null; // { about: {...}, impressum: {...} }
+
+const PG_HINT = 'Formatierung: **fett**, [Linktext](Adresse). E-Mail- und https://-Adressen werden von selbst zu Links. Eine Leerzeile macht einen neuen Absatz.';
+
+async function loadPages() {
+  const res  = await fetch('/api/pages.php').catch(() => null);
+  const data = res?.ok ? await res.json().catch(() => null) : null;
+  if (!data) { showError('pages-error-ueber', 'Die Inhalte konnten nicht geladen werden. Bitte die Seite neu laden.'); return; }
+  pagesData = {
+    about: { portrait: { src: '', alt: '' }, eyebrow: '', name: '', intro: [], quote: { text: '', author: '' }, sections: [], contact: { title: '', text: '' }, ...data.about },
+    impressum: { title: '', blocks: [], stand: '', ...data.impressum },
+  };
+  pagesData.about.portrait = { src: '', alt: '', ...pagesData.about.portrait };
+  pagesData.about.quote    = { text: '', author: '', ...pagesData.about.quote };
+  pagesData.about.contact  = { title: '', text: '', ...pagesData.about.contact };
+  renderAboutEditor();
+  renderImpressumEditor();
+}
+
+/* ── Bearbeiten per Pfad ("sections.2.items.1.text") ── */
+const pgGet = (root, path) => path.split('.').reduce((o, k) => (o == null ? o : o[k]), pagesData[root]);
+function pgSet(root, path, value) {
+  const keys = path.split('.');
+  const last = keys.pop();
+  keys.reduce((o, k) => o[k], pagesData[root])[last] = value;
+}
+const pgRender = (root) => (root === 'about' ? renderAboutEditor() : renderImpressumEditor());
+function pgAdd(root, path, item) { pgGet(root, path).push(item); pgRender(root); }
+function pgRemove(root, path, i) { pgGet(root, path).splice(i, 1); pgRender(root); }
+function pgMove(root, path, i, delta) {
+  const list = pgGet(root, path);
+  const j = i + delta;
+  if (j < 0 || j >= list.length) return;
+  [list[i], list[j]] = [list[j], list[i]];
+  pgRender(root);
+}
+
+// ↑ ↓ ×  für ein Listenelement
+function pgBtns(root, path, i, len, what) {
+  return `<span class="pg-btns">
+    <button type="button" onclick="pgMove('${root}','${path}',${i},-1)" ${i === 0 ? 'disabled' : ''} title="Nach oben">↑</button>
+    <button type="button" onclick="pgMove('${root}','${path}',${i},1)" ${i === len - 1 ? 'disabled' : ''} title="Nach unten">↓</button>
+    <button type="button" class="pg-del" onclick="pgRemove('${root}','${path}',${i})" title="${what} entfernen">×</button></span>`;
+}
+
+/* ── Über mich ── */
+function renderAboutEditor() {
+  const a = pagesData.about;
+  const attr = (v) => escAttr(v);
+
+  const sections = a.sections.map((s, si) => {
+    const base = `sections.${si}`;
+    const items = (s.items || []).map((it, ii) => `
+      <div class="pg-item">
+        <input class="pg-year" type="text" placeholder="Jahr" value="${attr(it.year)}" oninput="pgSet('about','${base}.items.${ii}.year',this.value)">
+        <input class="pg-text" type="text" placeholder="Eintrag" value="${attr(it.text)}" oninput="pgSet('about','${base}.items.${ii}.text',this.value)">
+        ${pgBtns('about', base + '.items', ii, s.items.length, 'Eintrag')}
+      </div>`).join('');
+    const photos = (s.images || []).map((img, pi) => `
+      <div class="pg-photo">
+        <img src="${attr(img.src)}" alt="">
+        <input type="text" placeholder="Bildbeschreibung" value="${attr(img.alt)}" oninput="pgSet('about','${base}.images.${pi}.alt',this.value)">
+        ${pgBtns('about', base + '.images', pi, s.images.length, 'Foto')}
+      </div>`).join('');
+    return `
+      <div class="pg-section">
+        <div class="pg-section-head">
+          <input class="mirror-day" type="text" placeholder="Überschrift des Abschnitts" value="${attr(s.title)}" oninput="pgSet('about','${base}.title',this.value)">
+          ${pgBtns('about', 'sections', si, a.sections.length, 'Abschnitt')}
+        </div>
+        ${items}
+        <button type="button" class="mirror-add mirror-add--row" onclick="pgAdd('about','${base}.items',{year:'',text:''})">+ Eintrag</button>
+        <div class="pg-photos">${photos}
+          <button type="button" class="mirror-add pg-photo-add" onclick="document.getElementById('pg-file-${si}').click()">+ Fotos</button>
+          <input type="file" id="pg-file-${si}" accept="image/*" multiple style="display:none" onchange="pgUploadPhotos(${si}, this)">
+        </div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('ueber-editor').innerHTML = `
+    <p class="mirror-hint">Der Aufbau entspricht der Seite „Über mich“. Zum Ändern direkt in einen Text klicken. ${PG_HINT}</p>
+    <div class="pg-hero">
+      <div class="pg-portrait">
+        <img src="${attr(a.portrait.src)}" alt="">
+        <button type="button" class="btn-secondary" onclick="document.getElementById('pg-portrait-file').click()">Foto ändern</button>
+        <input type="file" id="pg-portrait-file" accept="image/*" style="display:none" onchange="pgUploadPortrait(this)">
+        <input type="text" placeholder="Bildbeschreibung" value="${attr(a.portrait.alt)}" oninput="pgSet('about','portrait.alt',this.value)">
+      </div>
+      <div class="pg-intro">
+        <input class="mirror-eyebrow" type="text" placeholder="Kleiner Hinweistext" value="${attr(a.eyebrow)}" oninput="pgSet('about','eyebrow',this.value)">
+        <input class="mirror-title" type="text" placeholder="Name" value="${attr(a.name)}" oninput="pgSet('about','name',this.value)">
+        ${a.intro.map((p, i) => `
+          <div class="pg-row">
+            <textarea class="mirror-text" rows="4" placeholder="Absatz" oninput="pgSet('about','intro.${i}',this.value)">${escHtml(p)}</textarea>
+            ${pgBtns('about', 'intro', i, a.intro.length, 'Absatz')}
+          </div>`).join('')}
+        <button type="button" class="mirror-add mirror-add--row" onclick="pgAdd('about','intro','')">+ Absatz</button>
+        <textarea class="mirror-text pg-quote" rows="2" placeholder="Zitat" oninput="pgSet('about','quote.text',this.value)">${escHtml(a.quote.text)}</textarea>
+        <input class="mirror-small" type="text" placeholder="Von wem stammt das Zitat?" value="${attr(a.quote.author)}" oninput="pgSet('about','quote.author',this.value)">
+      </div>
+    </div>
+    <h4 class="mirror-heading">Werdegang</h4>
+    ${sections}
+    <button type="button" class="mirror-add mirror-add--row" onclick="pgAdd('about','sections',{title:'',items:[],images:[]})">+ Abschnitt hinzufügen</button>
+    <h4 class="mirror-heading">Kontaktkasten (unten auf der Seite)</h4>
+    <input class="mirror-day" type="text" placeholder="Überschrift" value="${attr(a.contact.title)}" oninput="pgSet('about','contact.title',this.value)">
+    <textarea class="mirror-text" rows="3" placeholder="Adresse, Telefon, E-Mail" oninput="pgSet('about','contact.text',this.value)">${escHtml(a.contact.text)}</textarea>`;
+}
+
+async function pgUploadPortrait(input) {
+  const file = input.files[0];
+  input.value = '';
+  if (!file) return;
+  try { pagesData.about.portrait.src = await uploadImage(file); renderAboutEditor(); }
+  catch (e) { showError('pages-error-ueber', e.message); }
+}
+
+async function pgUploadPhotos(sectionIndex, input) {
+  const files = Array.from(input.files || []).filter(f => f.type.startsWith('image/'));
+  input.value = '';
+  for (const file of files) {
+    try { pagesData.about.sections[sectionIndex].images.push({ src: await uploadImage(file), alt: '' }); renderAboutEditor(); }
+    catch (e) { showError('pages-error-ueber', e.message); }
+  }
+}
+
+/* ── Impressum ── */
+function renderImpressumEditor() {
+  const imp = pagesData.impressum;
+  const attr = (v) => escAttr(v);
+  document.getElementById('impressum-editor').innerHTML = `
+    <p class="mirror-hint">Rechtlich verbindlicher Text – bitte mit Bedacht ändern. ${PG_HINT} Das „Stand“-Datum unten auf der Seite wird beim Speichern automatisch auf heute gesetzt.</p>
+    <input class="mirror-title" type="text" placeholder="Überschrift" value="${attr(imp.title)}" oninput="pgSet('impressum','title',this.value)">
+    ${imp.blocks.map((b, i) => `
+      <div class="pg-section">
+        <div class="pg-section-head">
+          <input class="mirror-day" type="text" placeholder="Zwischenüberschrift (darf leer sein)" value="${attr(b.heading)}" oninput="pgSet('impressum','blocks.${i}.heading',this.value)">
+          ${pgBtns('impressum', 'blocks', i, imp.blocks.length, 'Abschnitt')}
+        </div>
+        <textarea class="mirror-text" rows="6" placeholder="Text" oninput="pgSet('impressum','blocks.${i}.text',this.value)">${escHtml(b.text)}</textarea>
+        <label class="pg-check"><input type="checkbox" ${b.boxed ? 'checked' : ''} onchange="pgSet('impressum','blocks.${i}.boxed',this.checked)"> Als hervorgehobenen Kasten darstellen (z. B. für die Anschrift)</label>
+      </div>`).join('')}
+    <button type="button" class="mirror-add mirror-add--row" onclick="pgAdd('impressum','blocks',{heading:'',text:'',boxed:false})">+ Abschnitt hinzufügen</button>
+    <p class="mirror-small" style="margin:.75rem 0 0;color:var(--ink-f)">Stand der Seite: ${imp.stand ? escHtml(imp.stand.split('-').reverse().join('.')) : '–'}</p>`;
+}
+
+/* ── Speichern (beide Seiten zusammen) ── */
+async function savePages(which) {
+  const errId = which === 'about' ? 'pages-error-ueber' : 'pages-error-impressum';
+  hideError(errId);
+  if (!pagesData) { showError(errId, 'Die Inhalte wurden nicht vollständig geladen. Bitte die Seite neu laden (Strg + F5).'); return; }
+
+  const a = pagesData.about;
+  if (!a.name.trim()) { showError(errId, 'Bitte einen Namen eintragen (Über mich).'); return; }
+  if (a.sections.some(s => !s.title.trim())) { showError(errId, 'Jeder Abschnitt unter „Über mich“ braucht eine Überschrift (oder mit × entfernen).'); return; }
+  // Leere Zeilen aufraeumen
+  a.intro = a.intro.filter(p => p.trim());
+  a.sections.forEach(s => {
+    s.items  = s.items.filter(i => i.year.trim() || i.text.trim());
+    s.images = s.images.filter(i => i.src);
+  });
+  pagesData.impressum.blocks = pagesData.impressum.blocks.filter(b => b.heading.trim() || b.text.trim());
+  if (which === 'impressum') pagesData.impressum.stand = todayStr();
+
+  try {
+    const res  = await fetch('/api/pages.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrfToken },
+      body: JSON.stringify(pagesData),
+    });
+    const data = await res.json().catch(() => null);
+    if (!data?.ok) { showError(errId, data?.error || 'Speichern fehlgeschlagen'); return; }
+    showToast(which === 'about' ? 'Über mich gespeichert' : 'Impressum gespeichert');
+    renderAboutEditor();
+    renderImpressumEditor();
+  } catch (e) {
+    showError(errId, 'Verbindungsfehler');
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
    STARTSEITE — Admin: "Aktuelles" und Highlights (api/home.php, data/home.json)
    ═══════════════════════════════════════════════════════════════════════ */
 const MAX_HIGHLIGHTS = 4; // gleicher Wert wie HOME_MAX_HIGHLIGHTS in partials/home-data.php
@@ -1345,10 +1556,7 @@ function setFocusPos(pos) {
   document.getElementById('focus-preview').style.backgroundPosition = pos;
 }
 
-function pickFocus(event) {
-  const pos = focusPercentFromClick(document.getElementById('focus-img'), event.clientX, event.clientY);
-  if (pos) setFocusPos(pos);
-}
+// Der Rahmen im Dialog wird per makeFrameDraggable('focus-marker', setFocusPos) bewegt (siehe Start)
 
 async function saveHighlightFocus() {
   const previous = { ...homeData.focus };

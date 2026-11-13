@@ -5,8 +5,8 @@
 (() => {
   const realFetch = window.fetch.bind(window);
   const PREFIX = 'agb-demo:';
-  const SEEDS = { gallery: 'data/gallery.json', courses: 'data/courses.json', settings: 'data/settings.json', home: 'data/home.json' };
-  const EMPTY = { settings: { aiStyleNotes: '' }, home: { highlights: [], news: [], focus: {} } };
+  const SEEDS = { gallery: 'data/gallery.json', courses: 'data/courses.json', settings: 'data/settings.json', home: 'data/home.json', pages: 'data/pages.json' };
+  const EMPTY = { settings: { aiStyleNotes: '' }, home: { highlights: [], news: [], focus: {} }, pages: { about: {}, impressum: {} } };
 
   const reply = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json' } });
 

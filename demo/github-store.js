@@ -5,7 +5,7 @@
    Wird von demo/demo-api.js als Speicher benutzt, wenn window.AGB_STORE_CONFIG gesetzt ist
    (siehe build-vorschau.php, Seite admin/). Testbar ohne Browser: node demo/github-store.test.js */
 (() => {
-  const PATHS = { gallery: 'data/gallery.json', courses: 'data/courses.json', settings: 'data/settings.json', home: 'data/home.json' };
+  const PATHS = { gallery: 'data/gallery.json', courses: 'data/courses.json', settings: 'data/settings.json', home: 'data/home.json', pages: 'data/pages.json' };
   const TOKEN_KEY = 'agb-gh-token';
 
   const b64FromBytes = (bytes) => {
@@ -16,10 +16,10 @@
   const bytesFromB64 = (b64) => Uint8Array.from(atob(b64.replace(/\s/g, '')), (c) => c.charCodeAt(0));
   const utf8 = (text) => new TextEncoder().encode(text);
 
-  // Im Repo (und fuer PHP) stehen Bildpfade root-absolut ("/uploads/x.jpg"); die Redaktionsseite liegt
+  // Im Repo (und fuer PHP) stehen Bildpfade root-absolut ("/uploads/x.jpg", "/media/x.jpg"); die Redaktionsseite liegt
   // unter einem Unterpfad (github.io/<repo>/), dort muessen sie relativ sein. Beim Speichern zurueck.
-  const toRelative = (obj) => JSON.parse(JSON.stringify(obj).replaceAll('"/uploads/', '"uploads/'));
-  const toAbsolute = (obj) => JSON.parse(JSON.stringify(obj).replaceAll('"uploads/', '"/uploads/'));
+  const toRelative = (obj) => JSON.parse(JSON.stringify(obj).replace(/"\/(uploads|media)\//g, '"$1/'));
+  const toAbsolute = (obj) => JSON.parse(JSON.stringify(obj).replace(/"(uploads|media)\//g, '"/$1/'));
 
   // env: { fetch, storage, resize(file) -> Blob, cacheUpload(relativeUrl, blob), shareWithWorker(cfg|null), baseUrl }
   function create(cfg, env) {
