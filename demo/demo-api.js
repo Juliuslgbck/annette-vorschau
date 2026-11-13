@@ -67,8 +67,9 @@
           const stored = await store.read(name);
           if (stored) return reply(stored);
         } catch (e) {
-          // Lesefehler NICHT als "leer" melden - sonst wuerde der Admin mit leeren Daten weiterarbeiten
-          return reply({ ok: false, error: e.message }, 502);
+          // Im Admin Lesefehler NICHT als "leer" melden - sonst wuerde er mit leeren Daten weiterarbeiten.
+          // Oeffentliche Seiten zeigen im Fehlerfall einfach die veroeffentlichte Fassung.
+          if (location.pathname.includes('/admin')) return reply({ ok: false, error: e.message }, 502);
         }
         const seed = await realFetch(SEEDS[name]).catch(() => null);
         return seed?.ok ? seed : reply(EMPTY[name] || {});
@@ -101,7 +102,15 @@
   };
 
   window.addEventListener('DOMContentLoaded', () => {
-    if (!location.pathname.includes('/admin')) return;
+    // Oeffentliche Vorschau-Seite eines angemeldeten Redakteurs: deutlich kennzeichnen, dass das NICHT der veroeffentlichte Stand ist
+    if (!location.pathname.includes('/admin')) {
+      if (store.mode !== 'github') return;
+      const note = document.createElement('div');
+      note.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:9999;padding:.55rem 1rem;background:#8b2252;color:#fff;font:13px/1.4 sans-serif;text-align:center';
+      note.innerHTML = 'Vorschau mit deinen gespeicherten Änderungen – nur für dich sichtbar · <a href="admin/" style="color:#fff;text-decoration:underline">Zurück zum Admin</a>';
+      document.body.append(note);
+      return;
+    }
     store.patchLogin?.(document);
 
     // Backup ist eine Seitennavigation (kein fetch) und gibt es hier nicht.

@@ -1011,3 +1011,6 @@ body {
 .slide-tile-btns button:disabled { opacity: .35; cursor: default; }
 .slide-add { min-height: 8rem; }
 #slideshow-status { display: block; min-height: 1.2rem; margin-bottom: 1.25rem; font-size: .75rem; color: var(--ink-m); }
+
+/* Knopf-Link in der Kopfleiste ("Seite ansehen") */
+a.section-btn { display: inline-flex; align-items: center; text-decoration: none; }

@@ -169,12 +169,16 @@
   const api = { create, PATHS, TOKEN_KEY, toRelative, toAbsolute };
   if (typeof module !== 'undefined') { module.exports = api; return; }
 
+  // Admin: immer. Oeffentliche Vorschau-Seiten: nur fuer Angemeldete - sie sehen dort ihren gespeicherten
+  // Stand; alle anderen sehen die veroeffentlichte Fassung.
   if (window.AGB_STORE_CONFIG) {
     const env = browserEnv();
-    window.AGB_STORE = create(window.AGB_STORE_CONFIG, env);
-    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
-    // Wer schon angemeldet ist, gibt dem Service Worker die Zugangsdaten (z.B. nach einem Update)
     const tok = env.storage.getItem(TOKEN_KEY);
-    if (tok) env.shareWithWorker({ ...window.AGB_STORE_CONFIG, token: tok });
+    if (location.pathname.includes('/admin') || tok) {
+      window.AGB_STORE = create(window.AGB_STORE_CONFIG, env);
+      if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+      // Wer schon angemeldet ist, gibt dem Service Worker die Zugangsdaten (z.B. nach einem Update)
+      if (tok) env.shareWithWorker({ ...window.AGB_STORE_CONFIG, token: tok });
+    }
   }
 })();
