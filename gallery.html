@@ -33,7 +33,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="media/favicon/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="media/favicon/apple-touch-icon.png">
 
-<link rel="stylesheet" href="assets/css/main.css?v=1794576499">
+<link rel="stylesheet" href="assets/css/main.css?v=1794661514">
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LocalBusiness","additionalType":"https://schema.org/ArtGallery","name":"Annette Gerke-Bischoff","description":"Atelier für Malerei (Aquarell, Mischtechnik) mit Verkauf von Originalwerken sowie Mal- und Kreativkursen.","url":"https://annettegerkebischoff.de/","image":"https://annettegerkebischoff.de/uploads/works/11-mischtechnik-auf-papier-50-cm-x-65-cmi.jpg","telephone":"+49-5241-5270280","email":"annettegerke3@aol.com","address":{"@type":"PostalAddress","streetAddress":"Rudolf-Harbig-Weg 3","postalCode":"33332","addressLocality":"Gütersloh","addressCountry":"DE"},"founder":{"@type":"Person","name":"Annette Gerke-Bischoff"}}</script>
@@ -45,13 +45,27 @@
       <span class="nav-brand-name">Annette Gerke-Bischoff</span>
       <span class="nav-brand-tag">Annettes Atelier Gütersloh</span>
     </div>
-    <div class="nav-links">
-              <a href="index.html">Start</a>
-              <a href="gallery.html" class="active" aria-current="page">Galerie</a>
-              <a href="kursangebote.html">Kurse</a>
-              <a href="about.html">Über mich</a>
-              <a href="kontakt.html">Kontakt</a>
-          </div>
+    <button type="button" class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-menu">
+      <svg class="icon-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="nav-menu" id="nav-menu">
+      <div class="nav-links">
+                  <a href="index.html">Start</a>
+                  <a href="gallery.html" class="active" aria-current="page">Galerie</a>
+                  <a href="kursangebote.html">Kurse</a>
+                  <a href="about.html">Über mich</a>
+                  <a href="kontakt.html">Kontakt</a>
+              </div>
+      <div class="nav-menu-contact">
+        <p class="mini-eyebrow">Atelier Gütersloh</p>
+        <p>Rudolf-Harbig-Weg 3 · 33332 Gütersloh</p>
+        <div class="contact-actions">
+  <a href="tel:052415270280" class="act act--solid"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Anrufen</a>
+  <a href="mailto:annettegerke3@aol.com" class="act act--line"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>E-Mail</a>
+</div>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -110,6 +124,10 @@
     <div class="site-footer-col">
       <p class="site-footer-brand">Annette Gerke-Bischoff</p>
       <p>Rudolf-Harbig-Weg 3<br>33332 Gütersloh</p>
+      <div class="contact-actions">
+  <a href="tel:052415270280" class="act act--solid"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Anrufen</a>
+  <a href="mailto:annettegerke3@aol.com" class="act act--line"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>E-Mail</a>
+</div>
     </div>
     <div class="site-footer-col">
       <p class="site-footer-heading">Kontakt</p>
@@ -124,7 +142,7 @@
                   <a href="kursangebote.html">Kurse</a>
                   <a href="about.html">Über mich</a>
                   <a href="kontakt.html">Kontakt</a>
-                <a href="impressum.html">Impressum</a>
+                <a href="impressum.html" class="footer-impressum">Impressum</a>
       </div>
     </div>
   </div>
@@ -133,7 +151,7 @@
   </div>
 </footer>
 
-<script src="assets/js/common.js?v=1794416553"></script>
-<script src="assets/js/gallery.js?v=1794416553"></script>
+<script src="assets/js/common.js?v=1794661437"></script>
+<script src="assets/js/gallery.js?v=1794661437"></script>
 </body>
 </html>

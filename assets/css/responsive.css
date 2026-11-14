@@ -1,138 +1,514 @@
+/*
+  Handy-Ansicht (bis 700px) nach dem Design aus dem Designer (Artboards 390px breit).
+  Bewusst in px: die Basis-Schrift der Seite ist 18px, die Entwuerfe sind aber in echten Pixeln gemessen.
+  Grundregeln: Tipp-Ziele mindestens 44-48px, Text mindestens 14-15px, kein Hover noetig.
+*/
 @media (max-width: 700px) {
+
+  /* ── Kopfleiste + Menue ── */
   .nav-inner {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 0.9rem 1.25rem;
+    height: 60px;
+    gap: 8px;
+    padding: 0 6px 0 18px;
   }
+
+  .nav-brand { min-width: 0; }
 
   .nav-brand-name {
-    font-size: 1.15rem;
+    font-size: 21px;
+    font-weight: 600;
+    white-space: nowrap;
   }
 
+  .nav-brand-tag {
+    margin-top: 3px;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    white-space: nowrap;
+  }
+
+  .nav-toggle {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .nav-toggle svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+
+  .nav-toggle .icon-close,
+  #site-nav.menu-open .nav-toggle .icon-open { display: none; }
+  #site-nav.menu-open .nav-toggle .icon-close { display: block; }
+
+  /* Menue: eine Flaeche unter der Leiste, grosse Links */
+  .nav-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 18px 22px 28px;
+    background: linear-gradient(rgba(255, 245, 226, 0.92), rgba(255, 245, 226, 0.98) 60%), var(--bar-texture) center / cover;
+  }
+
+  #site-nav.menu-open .nav-menu { display: flex; }
+  body.menu-open { overflow: hidden; }
+
   .nav-links {
-    gap: 0.4rem 0.9rem;
+    flex: 1;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0;
   }
 
   .nav-links a {
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 68px;
+    padding: 0;
+    border-bottom: 1px solid rgba(26, 23, 20, 0.12);
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-style: italic;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
-  .hero-frame {
-    padding: 0;
+  .nav-links a.active { border-bottom-color: rgba(26, 23, 20, 0.12); }
+
+  .nav-links a.active::after {
+    content: "";
+    width: 36px;
+    height: 2px;
+    background: var(--brand);
   }
+
+  .nav-menu-contact {
+    display: block;
+    padding-top: 24px;
+  }
+
+  .nav-menu-contact p { font-size: 15px; line-height: 1.55; }
+
+  .mini-eyebrow {
+    margin-bottom: 4px;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+
+  .nav-menu-contact .contact-actions { margin-top: 14px; }
+
+  /* Anrufen / E-Mail */
+  .contact-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .contact-actions .act {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .contact-actions .act svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .contact-actions .act--solid { background: var(--brand); color: #fff; }
+  .contact-actions .act--line { border: 1px solid var(--brand); color: var(--brand); }
+
+  /* ── Fusszeile: kompakt, Kontakt zum Antippen ── */
+  .site-footer { margin-top: 38px; }
+
+  .site-footer-cols {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 26px 18px 0;
+  }
+
+  .site-footer-brand { font-size: 21px; font-weight: 600; margin-bottom: 4px; }
+  .site-footer-col p { font-size: 15px; line-height: 1.55; }
+  .site-footer-col .contact-actions { margin-top: 16px; }
+  .site-footer-col:nth-child(2),
+  .site-footer-col:nth-child(3) .site-footer-heading,
+  .site-footer-links a:not(.footer-impressum) { display: none; }
+  .site-footer-links { margin-top: 18px; font-size: 13px; }
+  .site-footer-links a { padding: 6px 0; }
+
+  .site-footer-bottom {
+    padding: 4px 18px 22px;
+    border-top: 0;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  /* ── Startseite ── */
+  .hero-frame { padding: 0; }
 
   .home-hero {
     height: auto;
+    overflow: visible;
     border-radius: 0;
   }
 
+  /* Hintergrund endet 158px vor dem Ende: das gerahmte Bild (188px breit, 3:4) ragt aus dem Hero heraus */
+  .hero-bg,
+  .hero-gradient { bottom: 158px; }
+  .hero-gradient { background: linear-gradient(180deg, rgba(26, 18, 22, 0.38), rgba(26, 18, 22, 0.68)); }
+
   .hero-content {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.75rem 1.25rem;
+    display: block;
+    height: auto;
+    padding: 0;
   }
 
   .hero-text-col {
     max-width: none;
+    padding: 34px 22px 116px; /* unten Platz fuer das gerahmte Bild, das 92px hineinragt */
   }
 
+  .hero-eyebrow { margin-bottom: 12px; font-size: 11px; letter-spacing: 0.24em; }
+  .hero-heading { font-size: 50px; }
+  .hero-subtitle { max-width: none; margin-top: 16px; font-size: 19px; }
+  .hero-subtitle cite { font-size: 10px; }
+
   .hero-ctas {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-top: 24px;
   }
 
   .hero-ctas .cta-btn {
-    padding: 0.7rem 1.4rem;
-    font-size: 0.64rem;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 6px;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-align: center;
   }
 
+  .hero-ctas .cta-btn--primary { background: #fff; color: var(--brand); }
+  .hero-ctas .cta-btn--ghost { border: 1px solid rgba(255, 255, 255, 0.75); color: #fff; }
+
   .hero-img-col {
-    align-self: center;
-    padding-top: 1.25rem;
+    position: relative;
+    z-index: 3;
+    width: 188px;
+    margin: -92px auto 0;
+    padding: 0;
   }
 
   .hero-img-col img {
-    max-width: 220px;
-  }
-
-  .news {
-    padding: 0 1.25rem 2.25rem;
+    width: 188px;
+    max-width: none;
+    aspect-ratio: 3 / 4;
+    border: 6px solid #fff;
+    box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.55);
+    box-sizing: border-box;
+    object-fit: cover;
   }
 
   .highlights {
-    padding: 1.75rem 1.25rem 2.25rem;
+    display: flex;
+    flex-direction: column;
+    padding: 44px 18px 0;
   }
 
-  .highlights-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .highlights-head { display: contents; }
+  .highlights-eyebrow { margin-bottom: 6px; font-size: 11px; }
+  .highlights-heading { font-size: 31px; line-height: 1.1; }
+  .highlights-grid { gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 18px; }
+
+  .highlights-link {
+    display: flex;
+    order: 3;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    margin-top: 12px;
+    padding: 0;
+    border: 1px solid rgba(139, 34, 82, 0.4);
+    color: var(--brand);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
   }
 
-  .site-footer-cols {
-    grid-template-columns: 1fr;
-    padding: 1.5rem 1.25rem 1.25rem;
+  /* Aktuelles: wischbare Karten, die naechste lugt hervor */
+  .news { padding: 46px 0 0; }
+  .news .highlights-eyebrow,
+  .news .highlights-heading { padding: 0 18px; }
+
+  .news-grid {
+    display: flex;
+    gap: 12px;
+    margin-top: 0;
+    padding: 18px 18px 4px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
   }
 
-  .ueber-body,
-  .galerie-overview,
-  .galerie-detail,
-  .impressum-body,
-  .kontakt-body,
-  .kurs-wrap {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+  .news-grid::-webkit-scrollbar { display: none; }
+  .news-card { flex: 0 0 min(304px, 82vw); scroll-snap-align: start; }
+  .news-body { padding: 14px 16px 16px; }
+  .news-title { font-size: 25px; line-height: 1.15; }
+  .news-text { font-size: 15px; line-height: 1.55; }
+  .news-period { font-size: 11px; }
+
+  /* ── Galerie ── */
+  .galerie-overview { padding: 30px 14px 0; }
+  .galerie-intro { margin-bottom: 22px; }
+  .galerie-intro h2 { font-size: 38px; }
+  .galerie-intro p { max-width: none; font-size: 15px; }
+
+  .style-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
+
+  .sinfo { padding: 10px 11px 12px; border-top: 0; }
+  .sname { font-size: 19px; line-height: 1.15; margin-bottom: 3px; }
+  .scount { margin: 0; font-size: 10.5px; letter-spacing: 0.14em; }
+  .sdesc,
+  .senter { display: none; }
+
+  .galerie-detail { padding: 0 14px; }
+
+  .gback {
+    min-height: 48px;
+    margin-bottom: 4px;
+    color: var(--brand);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+  }
+
+  .gback svg { width: 18px; height: 18px; }
+  .ghead { margin-bottom: 8px; padding-bottom: 0; border-bottom: 0; }
+  .ghead h2 { font-size: 38px; }
+  .ghead p { max-width: none; margin-top: 4px; font-size: 15px; line-height: 1.55; }
+  .wcount { margin-bottom: 20px; color: var(--text-soft); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .wlist { gap: 16px; }
+
+  .witem { grid-template-columns: 1fr; border-radius: 3px; }
+
+  /* Jedes Werk ganz sichtbar (Hoch- und Querformat), nie angeschnitten */
+  .witem-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 340px;
+    min-height: 0;
+    padding: 14px;
+    background: #f3ece0;
+  }
+
+  .witem-image img,
+  .witem img {
+    width: auto;
+    height: auto;
+    min-height: 0;
+    max-height: 100%;
+    background: none;
+    box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.45);
+    object-fit: contain;
+  }
+
+  .witem-nav { width: 44px; height: 44px; opacity: 1; }
+  .witem-prev { left: 8px; }
+  .witem-next { right: 8px; }
+
+  .wdet { padding: 14px 16px 16px; }
+  .wtitle { font-size: 25px; margin-bottom: 3px; }
+  .wmeta { margin-bottom: 8px; color: var(--text-soft); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .wdesc { padding-left: 0; border-left: 0; font-size: 15px; font-style: normal; line-height: 1.6; }
+
+  .abtn:not(:disabled) {
+    align-self: stretch;
+    height: 48px;
+    margin-top: 14px;
+    padding: 0;
+    border-color: rgba(139, 34, 82, 0.55);
+    background: none;
+    color: var(--brand);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+  }
+
+  /* ── Kurse ── */
+  .kurs-wrap { padding: 0; }
+
+  .tab-nav {
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 14px 14px 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tab-nav::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex: none;
+    height: 44px;
+    margin: 0;
+    padding: 0 18px;
+    border: 1px solid rgba(26, 23, 20, 0.2);
+    border-radius: 99px;
+    color: #3f3a35;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-style: normal;
+  }
+
+  .tab-btn.active { border-color: var(--brand); background: var(--brand); color: #fff; font-weight: 500; }
+
+  .tab-panel { padding: 24px 16px 8px; }
+  .panel-intro { margin-bottom: 20px; padding-bottom: 18px; }
+  .panel-intro .panel-eyebrow { font-size: 10.5px; letter-spacing: 0.16em; line-height: 1.5; }
+  .panel-intro h2 { font-size: 36px; line-height: 1.1; }
+  .panel-intro p,
+  .panel-body p { font-size: 16px; line-height: 1.65; }
+
+  .foto-duo { gap: 8px; }
+  .foto-duo img { aspect-ratio: 4 / 3; }
+  .foto-strip { grid-template-columns: 1fr 1fr; }
+
+  .kurs-times { grid-template-columns: 1fr; gap: 10px; }
+  .kurs-time-card { padding: 14px 16px; }
+  .kurs-time-card .day { font-size: 23px; }
+  .kurs-time-card .time { font-size: 18px; }
+  .kurs-time-card .detail { font-size: 14.5px; }
+
+  .slideshow-stage { height: 250px; }
+  .slide { inset: 0 52px; }
+  .slide-nav { width: 48px; height: 48px; font-size: 28px; }
+
+  /* Kalender: ein Monat pro Ansicht, grosse Felder; die Pfeile blaettern monatsweise */
+  .kalender-grid { grid-template-columns: 1fr; }
+  .kal-monat:nth-child(n+2) { display: none; }
+  .kal-monat-head { padding: 8px; font-size: 22px; font-weight: 600; }
+  .kal-day-head { padding: 8px 0; font-size: 11px; letter-spacing: 0.08em; }
+  .kal-day { min-height: 46px; padding: 0; font-size: 15px; }
+  .kal-kopf { gap: 10px; }
+  .kalender-label { font-size: 10.5px; line-height: 1.5; }
+  .kal-nav button { width: 44px; height: 44px; font-size: 22px; }
+  .kal-legende { gap: 8px 18px; font-size: 13.5px; }
+  .kal-swatch { width: 14px; height: 14px; }
+  .kal-notes { font-size: 14.5px; }
+  .kurs-note { font-size: 14px; line-height: 1.65; }
+
+  .preis-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .preis-item { padding: 12px 13px; }
+  .preis-item .preis-label { font-size: 12px; line-height: 1.35; }
+  .preis-item .preis-wert { font-size: 27px; line-height: 1.1; }
+  .preis-item .preis-detail { font-size: 12.5px; line-height: 1.45; }
+  .einzeln-table td,
+  .einzeln-table th { padding: 10px 4px; font-size: 15px; }
+
+  .kurs-cta { flex-direction: column; align-items: flex-start; }
+
+  /* ── Über mich: Portrait randlos, Werdegang als Karten (Foto oben) ── */
+  .ueber-body { padding: 0; }
 
   .ueber-hero {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-bottom: 0;
   }
 
   .ueber-portrait {
-    aspect-ratio: 16 / 9;
-    object-position: center 15%;
+    display: block;
+    width: 100%;
+    height: 340px;
+    aspect-ratio: auto;
+    border: 0;
+    object-position: center 22%;
   }
+
+  .ueber-intro { padding: 22px 16px 0; }
+  .ueber-intro .eyebrow { font-size: 10.5px; }
+  .ueber-intro h2 { font-size: 38px; line-height: 1.08; }
+  .ueber-intro p { font-size: 16px; line-height: 1.7; }
+  .ueber-intro blockquote { margin: 18px 0 0; font-size: 20px; }
+
+  .ueber-sections { gap: 14px; padding: 30px 16px 0; }
 
   .ueber-section,
-  .style-grid,
-  .kurs-times,
-  .preis-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ueber-section:nth-child(even) .ueber-text {
-    order: 0;
-  }
-
-  .witem {
-    grid-template-columns: 1fr;
-  }
-
-  .witem-image,
-  .witem img {
-    height: 52vw;
-    min-height: 190px;
-  }
-
-  .wdet {
-    padding: 1.25rem;
-  }
-
-  .tab-btn {
-    padding: 0.65rem 0.9rem;
-    font-size: 0.9rem;
-  }
-
-  .kalender-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .foto-strip {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .kurs-cta {
+  .ueber-section--text {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    gap: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: #fff;
+  }
+
+  .ueber-section:nth-child(even) .ueber-text { order: 0; }
+  .ueber-photos { order: -1; gap: 2px; }
+  .ueber-photos img { border: 0; border-radius: 0; }
+  .ueber-text { padding: 16px 16px 18px; }
+  .ueber-section h3 { margin-bottom: 10px; padding-bottom: 0; border-bottom: 0; font-size: 26px; }
+
+  .timeline li {
+    grid-template-columns: 52px 1fr;
+    gap: 6px;
+    padding: 9px 0;
+    border-bottom-color: rgba(26, 23, 20, 0.08);
+    font-size: 15px;
+  }
+
+  .timeline .yr { padding-top: 2px; font-size: 13px; font-weight: 500; }
+
+  .ueber-contact { margin: 26px 16px 0 !important; padding: 18px 16px 20px; }
+  .ueber-contact h3 { font-size: 24px; }
+  .ueber-contact p { font-size: 15px; line-height: 1.6; }
+
+  /* ── Impressum + Kontakt ── */
+  .impressum-body,
+  .kontakt-body {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }

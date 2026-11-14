@@ -47,6 +47,12 @@
   text-transform: uppercase;
 }
 
+/* Menue-Huelle: am Desktop unsichtbar (Kinder liegen direkt in .nav-inner), Knopf nur auf dem Handy */
+.nav-menu { display: contents; }
+.nav-menu-contact,
+.contact-actions,
+.nav-toggle { display: none; }
+
 .nav-links {
   display: flex;
   align-items: center;
