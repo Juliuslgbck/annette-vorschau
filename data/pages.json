@@ -161,13 +161,13 @@
         "title": "Impressum & Datenschutz",
         "blocks": [
             {
-                "heading": "Angaben gemäß § 5 TMG",
+                "heading": "Angaben gemäß § 5 DDG",
                 "text": "**Annette Gerke-Bischoff**\nRudolf-Harbig-Weg 3\n33332 Gütersloh\n\nTel.: [05241 / 527 02 80](tel:052415270280)\nE-Mail: annettegerke3@aol.com\nInternet: [www.annettegerkebischoff.de](https://annettegerkebischoff.de)",
                 "boxed": true
             },
             {
                 "heading": "",
-                "text": "Keine Umsatzsteuer, da Kleinunternehmer nach § 19 Umsatzsteuergesetz. Inhaltlich verantwortlich nach § 10 Abs. 3 MDStV: Annette Gerke-Bischoff.",
+                "text": "Keine Umsatzsteuer, da Kleinunternehmer nach § 19 Umsatzsteuergesetz.",
                 "boxed": false
             },
             {
@@ -196,6 +196,6 @@
                 "boxed": false
             }
         ],
-        "stand": "2026-11-09"
+        "stand": "2026-11-13"
     }
 }
